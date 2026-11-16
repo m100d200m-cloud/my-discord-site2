@@ -17,7 +17,7 @@ nav{display:flex;gap:24px;color:#e8edf5;font-size:13px}nav a:hover{color:var(--g
 .whatsapp-btn{display:inline-block;background:var(--whatsapp);color:white;padding:8px 15px;border-radius:8px;font-weight:bold;font-size:14px;text-align:center;text-decoration:none}
 .whatsapp-btn:hover{background:#1ebd58}
 
-.employee-panel{background:#eef7ff;border:1px solid #bce3ff;padding:15px;border-radius:10px;margin-bottom:20px;display:none}
+.employee-panel{background:#eef7ff;border:1px solid #bce3ff;padding:20px;border-radius:12px;margin-bottom:20px;display:none}
 .employee-panel.active{display:block}
 
 footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-width:1160px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}.foot-grid p,.foot-grid a{font-size:12px;color:#aebbd0}.copyright{border-top:1px solid #ffffff1c;margin:26px auto 0;padding-top:16px;max-width:1160px;font-size:11px;color:#8e9db4}
@@ -43,15 +43,15 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
  </div>
 </section>
 
-<!-- لوحة إضافة منتج للموظفين المعتمَدين -->
+<!-- لوحة الموظف / المسؤول (تظهر تلقائياً عند تسجيل الدخول بالرمز الصحيح) -->
 <div class="wrap" style="padding-bottom: 0;">
  <div id="employeeSection" class="employee-panel">
-    <h3>👨‍💼 لوحة الموظف (إضافة منتج جديد)</h3>
-    <p class="muted">بصفتك موظفاً معتمداً، يمكنك عرض منتج جديد في المتجر فوراً:</p>
+    <h3>👨‍💼 لوحة الموظفين والمسؤولين (إضافة منتج جديد)</h3>
+    <p class="muted">بصفتك مستخدماً مصرحاً، يمكنك نشر منتج جديد في المتجر فوراً:</p>
     <form onsubmit="addStoreProduct(event)" style="display:grid;gap:10px;margin-top:10px;">
         <div class="field"><label>المنتج :</label><input id="pName" required placeholder="اسم المنتج"></div>
         <div class="field"><label>السعر :</label><input id="pPrice" required placeholder="السعر (مثال: 300 ر.س)"></div>
-        <div class="field"><label>رقم التواصل :</label><input id="pPhone" required value="0566613938"></div>
+        <div class="field"><label>رقم التواصل :</label><input id="pPhone" required placeholder="05xxxxxxxx (رقم التواصل لصاحب المنتج)"></div>
         <button class="btn gold" type="submit">نشر المنتج في المتجر</button>
     </form>
  </div>
@@ -60,7 +60,7 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 <!-- عرض المنتجات -->
 <section class="wrap" id="shop">
  <div class="section-head">
-    <div><div class="tag">المتجر</div><h2>المنتجات المعروضة</h2><p>اضغط على المنتج للتواصل المباشر مع المسؤول عبر الواتساب.</p></div>
+    <div><div class="tag">المتجر</div><h2>المنتجات المعروضة</h2><p>اضغط على المنتج للتواصل المباشر مع المسؤول أو الموظف عبر الواتساب.</p></div>
  </div>
  <div class="grid" id="productsGrid">
     <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
@@ -69,7 +69,7 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
  </div>
 </section>
 
-<!-- قسم طلب منتج (بالشكل الجديد المطلوب) -->
+<!-- قسم طلب منتج (بالترتيب المطلوب) -->
 <section class="wrap" id="custom-request" style="background:#fff;border-radius:15px;margin:30px auto;border:1px solid var(--line);">
  <div class="section-head"><div><div class="tag">خدمة خاصة</div><h2>طلب منتج غير موجود</h2><p>أدخل مواصفات المنتج الذي ترغب به وسنقوم بتوفيره لك.</p></div></div>
  <form onsubmit="submitCustomOrder(event)" style="max-width:600px;">
@@ -85,7 +85,7 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
  </form>
 </section>
 
-<!-- قسم طلب توظيف -->
+<!-- قسم طلب توظيف (بالأسئلة المطلوبة) -->
 <section class="wrap" id="careers">
  <div class="section-head"><div><div class="tag">انضم إلينا</div><h2>طلب توظيف (انضم لفريق العمل)</h2><p>املأ النموذج أدناه ليتم مراجعة طلبك ومنحك صلاحيات الموظف في حال القبول.</p></div></div>
  <form onsubmit="submitJobApplication(event)" style="max-width:600px;background:white;padding:25px;border-radius:15px;border:1px solid var(--line);">
@@ -114,7 +114,7 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 </footer>
 </div>
 
-<!-- لوحة التحكم السرية للمسؤولين (تفتح عبر #admin) -->
+<!-- لوحة التحكم السرية للمسؤولين (تفتح عبر #admin في الرابط) -->
 <div id="admin" class="admin">
  <div class="adminbar">
     <b>لوحة تحكم المسؤول (الإدارة العامة)</b>
@@ -138,9 +138,9 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 </div>
 
 <!-- نافذة تسجيل الدخول -->
-<div class="modal" id="auth"><div class="modal-box"><button class="close" onclick="closeModal('auth')">إغلاق ✕</button><h2>تسجيل الدخول / حساب الموظفين</h2><p class="muted">إذا كنت موظفاً معتمداً، سيتم تفعيل لوحة إضافة المنتجات لديك تلقائياً.</p>
+<div class="modal" id="auth"><div class="modal-box"><button class="close" onclick="closeModal('auth')">إغلاق ✕</button><h2>تسجيل الدخول للموظفين والمسؤولين</h2><p class="muted">أدخل رمز الدخول (2222 للموظفين أو 2323 للمسؤولين):</p>
 <form onsubmit="handleAuth(event)">
-<div class="field"><label>اسم المستخدم / البريد</label><input id="loginName" required placeholder="ادخل اسمك"></div>
+<div class="field"><label>رمز الدخول</label><input id="loginCode" type="password" required placeholder="أدخل الرمز السرّي"></div>
 <button class="btn gold" type="submit">دخول</button>
 </form>
 </div></div>
@@ -149,31 +149,44 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 let products = JSON.parse(localStorage.getItem('store_products') || '[]');
 let customOrders = JSON.parse(localStorage.getItem('custom_orders') || '[]');
 let jobApps = JSON.parse(localStorage.getItem('job_apps') || '[]');
-let employees = JSON.parse(localStorage.getItem('approved_employees') || '[]');
-let currentUser = localStorage.getItem('current_user') || '';
+let isStaff = localStorage.getItem('is_staff') === 'true';
+let isAdmin = localStorage.getItem('is_admin') === 'true';
 
 function openModal(id){ document.getElementById(id).classList.add('show'); }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 
 function handleAuth(e){
     e.preventDefault();
-    const name = document.getElementById('loginName').value.trim();
-    currentUser = name;
-    localStorage.setItem('current_user', name);
-    closeModal('auth');
-    checkEmployeeStatus();
-    alert('مرحباً بك ' + name);
+    const code = document.getElementById('loginCode').value.trim();
+    
+    if(code === '2222'){
+        isStaff = true;
+        localStorage.setItem('is_staff', 'true');
+        alert('مرحباً بك أيها الموظف! تم تفعيل صلاحيات النشر.');
+        closeModal('auth');
+        checkPermissions();
+    } else if(code === '2323'){
+        isAdmin = true;
+        isStaff = true;
+        localStorage.setItem('is_admin', 'true');
+        localStorage.setItem('is_staff', 'true');
+        alert('مرحباً بك أيها المسؤول! تم تفعيل لوحة التحكم والصلاحيات الكاملة. (أضف #admin في نهاية الرابط لفتح لوحة التحكم).');
+        closeModal('auth');
+        checkPermissions();
+    } else {
+        alert('رمز الدخول غير صحيح! الرمز للموظفين 2222 وللمسؤولين 2323.');
+    }
 }
 
-function checkEmployeeStatus(){
-    if(employees.includes(currentUser)){
+function checkPermissions(){
+    if(isStaff || isAdmin){
         document.getElementById('employeeSection').classList.add('active');
     } else {
         document.getElementById('employeeSection').classList.remove('active');
     }
 }
 
-// الموظف ينشر منتج
+// الموظف أو المسؤول ينشر منتج
 function addStoreProduct(e){
     e.preventDefault();
     const name = document.getElementById('pName').value;
@@ -187,7 +200,7 @@ function addStoreProduct(e){
     renderProducts();
 }
 
-// عرض المنتجات للزوار مع زر واتساب مباشر
+// عرض المنتجات للزوار مع زر واتساب برقم صاحب المنتج المدخل
 function renderProducts(){
     const grid = document.getElementById('productsGrid');
     if(!products.length){
@@ -209,7 +222,7 @@ function renderProducts(){
     `).join('');
 }
 
-// طلب منتج خاص بالشكل الجديد
+// طلب منتج خاص بالشكل الجديد المطلوب
 function submitCustomOrder(e){
     e.preventDefault();
     const product = document.getElementById('reqProduct').value;
@@ -217,11 +230,11 @@ function submitCustomOrder(e){
 
     customOrders.push({product, priceLimit, status: 'جديد'});
     localStorage.setItem('custom_orders', JSON.stringify(customOrders));
-    alert('تم إرسال طلب المنتج بنجاح وستم دراسته!');
+    alert('تم إرسال طلب المنتج بنجاح وسيتم دراسته!');
     e.target.reset();
 }
 
-// طلب توظيف
+// طلب توظيف بالأسئلة المطلوبة
 function submitJobApplication(e){
     e.preventDefault();
     const name = document.getElementById('jobName').value;
@@ -234,17 +247,12 @@ function submitJobApplication(e){
     e.target.reset();
 }
 
-// قبول موظف من قبل المسؤول
+// قبول موظف من قبل المسؤول ومنحه الصلاحيات
 function approveEmployee(index){
-    const app = jobApps[index];
-    if(!employees.includes(app.name)){
-        employees.push(app.name);
-        localStorage.setItem('approved_employees', JSON.stringify(employees));
-    }
     jobApps.splice(index, 1);
     localStorage.setItem('job_apps', JSON.stringify(jobApps));
     renderAdmin();
-    alert('تم قبول الموظف بنجاح ومنحه صلاحيات النشر!');
+    alert('تم قبول الموظف بنجاح! (يمكنه الدخول برمز الموظفين 2222 للنشر).');
 }
 
 function rejectEmployee(index){
@@ -255,11 +263,9 @@ function rejectEmployee(index){
 }
 
 function renderAdmin(){
-    // جدول طلبات المنتجات
     const cTable = document.getElementById('adminCustomOrders');
     cTable.innerHTML = customOrders.length ? customOrders.map(o => `<tr><td>${escapeHtml(o.product)}</td><td>${escapeHtml(o.priceLimit)}</td><td>${o.status}</td></tr>`).join('') : '<tr><td colspan="3">لا توجد طلبات منتجات</td></tr>';
 
-    // جدول طلبات التوظيف
     const jTable = document.getElementById('adminJobApps');
     jTable.innerHTML = jobApps.length ? jobApps.map((j, i) => `
         <tr>
@@ -275,14 +281,18 @@ function renderAdmin(){
 }
 
 function escapeHtml(s){
-    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
 function showStore(){ document.getElementById('admin').classList.remove('active'); document.getElementById('store').style.display = 'block'; }
-function showAdmin(){ document.getElementById('store').style.display = 'none'; document.getElementById('admin').classList.add('active'); renderAdmin(); }
+function showAdmin(){ 
+    if(!isAdmin){ alert('هذه اللوحة خاصة بالمسبؤولين فقط!'); return; }
+    document.getElementById('store').style.display = 'none'; 
+    document.getElementById('admin').classList.add('active'); 
+    renderAdmin(); 
+}
 
 if(location.hash === '#admin') showAdmin();
 renderProducts();
-checkEmployeeStatus();
+checkPermissions();
 </script>
 </body></html>
