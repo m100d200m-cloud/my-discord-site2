@@ -17,7 +17,6 @@ nav{display:flex;gap:24px;color:#e8edf5;font-size:13px}nav a:hover{color:var(--g
 .services{background:#fff}.service-card{border-top:3px solid var(--gold)}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step-no{font-size:12px;color:#a17e3c;font-weight:bold}
 .cta{background:linear-gradient(120deg,#14233e,#203858);color:white;border-radius:18px;padding:36px;display:flex;justify-content:space-between;align-items:center;gap:20px}.cta h2{margin:0 0 8px}.cta p{color:#c9d3e1;margin:0;font-size:13px}
 
-/* قسم تواصل معنا والواتساب */
 .whatsapp-box {
     background: white;
     border: 2px dashed var(--whatsapp);
@@ -55,7 +54,11 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 <header>
  <a class="brand" href="#"><span class="mark">إ</span><span><strong>استشارات إدارية</strong><small>وتأسيس أنظمة الموارد البشرية الحديثة</small></span></a>
  <nav><a href="#home">الرئيسية</a><a href="#shop">المتجر</a><a href="#services">خدماتنا</a><a href="#how">آلية الطلب</a><a href="#contact">تواصل معنا</a></nav>
- <div class="actions"><button class="btn outline" onclick="openModal('auth')">تسجيل الدخول</button><button class="btn gold" onclick="openModal('cart')">سلة الطلبات <span id="cartCount">0</span></button></div>
+ <div class="actions">
+    <button class="btn outline" onclick="openModal('auth')">تسجيل الدخول</button>
+    <button class="btn gold" onclick="openModal('cart')">سلة الطلبات <span id="cartCount">0</span></button>
+    <button class="btn dark" onclick="showAdmin()" style="background:#0b1528; color:#e4c985;">لوحة التحكم</button>
+ </div>
 </header>
 <section class="hero" id="home"><div class="hero-inner">
  <div class="eyebrow">شريكك في التطوير الإداري والتميز المؤسسي</div>
@@ -66,12 +69,12 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 </div></section>
 <section class="wrap" id="shop"><div class="section-head"><div><div class="tag">المتجر الإلكتروني</div><h2>منتجات وخدمات مختارة</h2><p>اختر المنتج المناسب وأضفه إلى سلة الطلبات.</p></div><button class="btn dark" onclick="openModal('request')">طلب منتج غير موجود</button></div>
 <div class="grid" id="products">
- <article class="card"><div class="product-icon">▤</div><h3>حقيبة تأسيس الموارد البشرية</h3><p>نماذج وسياسات وإجراءات أساسية لتنظيم أعمال الموارد البشرية.</p><div class="card-foot"><span class="price">يحدد عند الطلب</span><button class="btn gold" onclick="addProduct('حقيبة تأسيس الموارد البشرية')">اطلب المنتج</button></div></article>
- <article class="card"><div class="product-icon">◈</div><h3>دليل السياسات والإجراءات</h3><p>إطار منظم يساعد على توحيد الإجراءات وتوضيح المسؤوليات.</p><div class="card-foot"><span class="price">يحدد عند الطلب</span><button class="btn gold" onclick="addProduct('دليل السياسات والإجراءات')">اطلب المنتج</button></div></article>
- <article class="card"><div class="product-icon">◎</div><h3>نماذج الموارد البشرية</h3><p>مجموعة نماذج إدارية قابلة للتخصيص وفق طبيعة المنشأة.</p><div class="card-foot"><span class="price">يحدد عند الطلب</span><button class="btn gold" onclick="addProduct('نماذج الموارد البشرية')">اطلب المنتج</button></div></article>
- <article class="card"><div class="product-icon">⌘</div><h3>استشارة إدارية</h3><p>جلسة لفهم التحديات وتحديد فرص التحسين والخطوات المناسبة.</p><div class="card-foot"><span class="price">حسب نطاق الاستشارة</span><button class="btn gold" onclick="addProduct('استشارة إدارية')">اطلب الخدمة</button></div></article>
- <article class="card"><div class="product-icon">▥</div><h3>تأسيس نظام موارد بشرية</h3><p>تصميم الهيكل والإجراءات والسياسات بما يتناسب مع المنشأة.</p><div class="card-foot"><span class="price">عرض سعر مخصص</span><button class="btn gold" onclick="addProduct('تأسيس نظام موارد بشرية')">اطلب الخدمة</button></div></article>
- <article class="card"><div class="product-icon">✧</div><h3>تطوير الأداء المؤسسي</h3><p>مراجعة العمليات واقتراح تحسينات عملية قابلة للقياس.</p><div class="card-foot"><span class="price">عرض سعر مخصص</span><button class="btn gold" onclick="addProduct('تطوير الأداء المؤسسي')">اطلب الخدمة</button></div></article>
+ <article class="card"><div class="product-icon">▤</div><h3>حقيبة تأسيس الموارد البشرية</h3><p>نماذج وسياسات وإجراءات أساسية لتنظيم أعمال الموارد البشرية.</p><div class="card-foot"><span class="price">2,500 ر.س</span><button class="btn gold" onclick="addProduct('حقيبة تأسيس الموارد البشرية', '2,500 ر.س')">اطلب المنتج</button></div></article>
+ <article class="card"><div class="product-icon">◈</div><h3>دليل السياسات والإجراءات</h3><p>إطار منظم يساعد على توحيد الإجراءات وتوضيح المسؤوليات.</p><div class="card-foot"><span class="price">1,200 ر.س</span><button class="btn gold" onclick="addProduct('دليل السياسات والإجراءات', '1,200 ر.س')">اطلب المنتج</button></div></article>
+ <article class="card"><div class="product-icon">◎</div><h3>نماذج الموارد البشرية</h3><p>مجموعة نماذج إدارية قابلة للتخصيص وفق طبيعة المنشأة.</p><div class="card-foot"><span class="price">800 ر.س</span><button class="btn gold" onclick="addProduct('نماذج الموارد البشرية', '800 ر.س')">اطلب المنتج</button></div></article>
+ <article class="card"><div class="product-icon">⌘</div><h3>استشارة إدارية</h3><p>جلسة لفهم التحديات وتحديد فرص التحسين والخطوات المناسبة.</p><div class="card-foot"><span class="price">450 ر.س</span><button class="btn gold" onclick="addProduct('استشارة إدارية', '450 ر.س')">اطلب الخدمة</button></div></article>
+ <article class="card"><div class="product-icon">▥</div><h3>تأسيس نظام موارد بشرية</h3><p>تصميم الهيكل والإجراءات والسياسات بما يتناسب مع المنشأة.</p><div class="card-foot"><span class="price">3,500 ر.س</span><button class="btn gold" onclick="addProduct('تأسيس نظام موارد بشرية', '3,500 ر.س')">اطلب الخدمة</button></div></article>
+ <article class="card"><div class="product-icon">✧</div><h3>تطوير الأداء المؤسسي</h3><p>مراجعة العمليات واقتراح تحسينات عملية قابلة للقياس.</p><div class="card-foot"><span class="price">2,000 ر.س</span><button class="btn gold" onclick="addProduct('تطوير الأداء المؤسسي', '2,000 ر.س')">اطلب الخدمة</button></div></article>
 </div></section>
 <section class="services" id="services"><div class="wrap"><div class="section-head"><div><div class="tag">ماذا نقدم؟</div><h2>خدمات تدعم نمو منشأتك</h2><p>نحو بيئة عمل أكثر تنظيماً وكفاءة.</p></div></div><div class="grid">
  <div class="card service-card"><h3>الاستشارات الإدارية</h3><p>تحليل الوضع الحالي، وتطوير الهياكل، وتحسين الإجراءات وآليات العمل.</p></div>
@@ -98,15 +101,190 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 <footer><div class="foot-grid"><div><div class="brand"><span class="mark">إ</span><span><strong>استشارات إدارية</strong><small>وتأسيس أنظمة الموارد البشرية الحديثة</small></span></div><p>حلول إدارية ومنتجات عملية لدعم المنشآت وتطوير بيئات العمل.</p></div><div><strong>روابط سريعة</strong><p><a href="#shop">المتجر</a></p><p><a href="#services">خدماتنا</a></p><p><a href="#how">آلية الطلب</a></p></div><div><strong>تواصل معنا</strong><p>الواتساب: 0566613938</p></div></div><div class="copyright">© 2026 جميع الحقوق محفوظة · استشارات إدارية وتأسيس أنظمة الموارد البشرية الحديثة</div></footer>
 </div>
 
-<div class="modal" id="auth"><div class="modal-box"><button class="close" onclick="closeModal('auth')">إغلاق ✕</button><h2>حسابك في المتجر</h2><p class="muted">سجّل الدخول أو أنشئ حساباً لمتابعة طلباتك وعمليات الشراء.</p>
-<div style="display:grid;gap:10px;margin:18px 0">
-<button class="btn dark" type="button" onclick="providerNotice('Google')">المتابعة باستخدام Google / Gmail</button>
-<button class="btn outline" style="color:#17243a;border-color:#cbd2dd" type="button" onclick="providerNotice('Apple')">المتابعة باستخدام Apple / iCloud</button>
+<!-- لوحة التحكم وسجلات اللوق -->
+<div id="admin" class="admin">
+ <div class="adminbar">
+    <b>لوحة إدارة المتجر والسجلات (Logs)</b>
+    <div>
+        <button class="btn gold" onclick="downloadLogFile()" style="margin-left: 10px;">📥 تنزيل ملف site-logs.txt</button>
+        <button class="btn outline" onclick="showStore()">العودة للموقع</button>
+    </div>
+ </div>
+ <div class="admin-content">
+    <h1>سجلات حركات الموقع (Logs)</h1>
+    <p class="muted">يتم تسجيل عمليات الدخول والطلبات هنا وتصديرها كملف على الكمبيوتر.</p>
+    <div class="admin-cards">
+        <div class="metric">الطلبات المسجلة<b id="ordersNum">0</b></div>
+        <div class="metric">المنتجات المعروضة<b>6</b></div>
+        <div class="metric">حالات بانتظار المراجعة<b id="pendingNum">0</b></div>
+    </div>
+    <h2>سجل الحركات والطلبات (Logs)</h2>
+    <table class="table">
+        <thead><tr><th>التوقيت</th><th>المنتج / العملية</th><th>رقم التواصل / العميل</th><th>الحالة</th></tr></thead>
+        <tbody id="ordersTable"><tr><td colspan="4">لا توجد سجلات حتى الآن</td></tr></tbody>
+    </table>
+ </div>
 </div>
-<div class="notice">تسجيل Google وApple يحتاج ربط الموقع بخدمة مصادقة وإعداد مفاتيح التطبيقات. الأزرار هنا توضيحية إلى أن يتم الربط.</div>
-<hr style="border:0;border-top:1px solid #e6e9ef;margin:20px 0">
-<h3>التسجيل بالبريد الإلكتروني</h3>
+
+<!-- نافذة تسجيل الدخول -->
+<div class="modal" id="auth"><div class="modal-box"><button class="close" onclick="closeModal('auth')">إغلاق ✕</button><h2>تسجيل الدخول / إنشاء حساب</h2><p class="muted">سجّل الدخول لتتمكن من متابعة الطلبات وتوثيقها في سجلات الموقع.</p>
 <form onsubmit="emailAuthNotice(event)">
-<div class="field"><label>الاسم</label><input id="authName" required placeholder="الاسم الكامل"></div>
+<div class="field"><label>الاسم الكامل</label><input id="authName" required placeholder="اسمك الكريم"></div>
 <div class="field"><label>البريد الإلكتروني</label><input id="authEmail" type="email" required placeholder="name@example.com"></div>
-<div class="field"><label>كلمة المرور</label><input id="authPassword" type="
+<div class="field"><label>كلمة المرور</label><input id="authPassword" type="password" minlength="6" required placeholder="••••••••"></div>
+<button class="btn gold" type="submit">تسجيل الدخول / إنشاء حساب</button>
+</form>
+</div></div>
+
+<!-- نافذة الطلب (الترتيب الجديد المطلوب) -->
+<div class="modal" id="request">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('request')">إغلاق ✕</button>
+  <h2>إرسال طلب جديد</h2>
+  <p class="muted">املأ تفاصيل الطلب أدناه وسيتم تسجيله في لوحة السجلات مباشرة.</p>
+  <form onsubmit="submitRequest(event)">
+   <div class="field">
+    <label>المنتج :</label>
+    <input id="custItem" required placeholder="اسم المنتج أو الخدمة المطلوبة">
+   </div>
+   <div class="field">
+    <label>السعر :</label>
+    <input id="custPrice" required placeholder="السعر (مثال: 500 ر.س)">
+   </div>
+   <div class="field">
+    <label>رقم التواصل :</label>
+    <input id="custPhone" required type="tel" placeholder="05xxxxxxxx">
+   </div>
+   <div class="field">
+    <label>اسم العميل / ملاحظات :</label>
+    <input id="custName" required placeholder="اسمك أو ملاحظات إضافية">
+   </div>
+   <button class="btn gold" type="submit">تأكيد وإرسال الطلب</button>
+  </form>
+ </div>
+</div>
+
+<div class="modal" id="cart"><div class="modal-box"><button class="close" onclick="closeModal('cart')">إغلاق ✕</button><h2>سلة الطلبات</h2><div id="cartItems" class="muted">السلة فارغة حالياً.</div><button class="btn gold" onclick="checkout()">متابعة وإرسال الطلب</button></div></div>
+
+<script>
+let cart=[], orders=JSON.parse(localStorage.getItem('site_logs')||'[]');
+
+function openModal(id){
+    if(id==='request' && cart.length){
+        document.getElementById('custItem').value = cart.map(i => i.name).join('، ');
+        document.getElementById('custPrice').value = cart.map(i => i.price).join('، ');
+    }
+    if(id==='cart') renderCart();
+    document.getElementById(id).classList.add('show');
+}
+function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+
+function addProduct(name, price){
+    cart.push({name, price});
+    document.getElementById('cartCount').textContent = cart.length;
+    openModal('cart');
+}
+
+function renderCart(){
+    const container = document.getElementById('cartItems');
+    if(!cart.length){ container.innerHTML = 'السلة فارغة حالياً.'; return; }
+    container.innerHTML = '<ul>' + cart.map(i => `<li><b>${escapeHtml(i.name)}</b> - ${escapeHtml(i.price)}</li>`).join('') + '</ul>';
+}
+
+function checkout(){
+    closeModal('cart');
+    openModal('request');
+}
+
+function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function emailAuthNotice(e){
+    e.preventDefault();
+    const name = document.getElementById('authName').value;
+    const time = new Date().toLocaleString('ar-SA');
+    
+    // تسجيل دخول في اللوق
+    orders.push({
+        time: time,
+        item: 'تسجيل دخول مستخدم',
+        phone: 'الاسم: ' + name,
+        status: 'نشط'
+    });
+    localStorage.setItem('site_logs', JSON.stringify(orders));
+    
+    alert('مرحباً بك ' + name + '! تم تسجيل الدخول وحفظ الحركة في سجلات اللوق.');
+    closeModal('auth');
+    renderAdmin();
+}
+
+function submitRequest(e){
+    e.preventDefault();
+    const time = new Date().toLocaleString('ar-SA');
+    const product = document.getElementById('custItem').value;
+    const price = document.getElementById('custPrice').value;
+    const phone = document.getElementById('custPhone').value;
+    const name = document.getElementById('custName').value;
+
+    let o = {
+        time: time,
+        item: product + ' (' + price + ')',
+        phone: phone + ' (' + name + ')',
+        status: 'بانتظار المراجعة'
+    };
+    
+    orders.push(o);
+    localStorage.setItem('site_logs', JSON.stringify(orders));
+    
+    alert('تم إرسال الطلب بنجاح وتوثيقه في ملف اللوق!');
+    cart = [];
+    document.getElementById('cartCount').textContent = '0';
+    e.target.reset();
+    closeModal('request');
+    renderAdmin();
+}
+
+function renderAdmin(){
+    document.getElementById('ordersNum').textContent = orders.length;
+    document.getElementById('pendingNum').textContent = orders.filter(o => o.status === 'بانتظار المراجعة').length;
+    const tbody = document.getElementById('ordersTable');
+    if(!orders.length){
+        tbody.innerHTML = '<tr><td colspan="4">لا توجد سجلات حتى الآن</td></tr>';
+        return;
+    }
+    tbody.innerHTML = orders.slice().reverse().map(o => `<tr><td>${escapeHtml(o.time)}</td><td>${escapeHtml(o.item)}</td><td>${escapeHtml(o.phone)}</td><td>${o.status}</td></tr>`).join('');
+}
+
+// دالة لتنزيل ملف site-logs.txt للكمبيوتر
+function downloadLogFile(){
+    let logs = JSON.parse(localStorage.getItem('site_logs') || '[]');
+    if(logs.length === 0){
+        alert("لا توجد سجلات مسجلة حتى الآن!");
+        return;
+    }
+
+    let fileContent = "=== سجلات موقع الاستشارات الإدارية (site-logs.txt) ===\n\n";
+    logs.forEach((log, index) => {
+        fileContent += `[${index + 1}] الوقت: ${log.time} | البند: ${log.item} | جهة الاتصال: ${log.phone} | الحالة: ${log.status}\n`;
+    });
+
+    const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'site-logs.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function showStore(){ document.getElementById('admin').classList.remove('active'); document.getElementById('store').style.display = 'block'; }
+function showAdmin(){ document.getElementById('store').style.display = 'none'; document.getElementById('admin').classList.add('active'); renderAdmin(); }
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') document.querySelectorAll('.modal').forEach(m => m.classList.remove('show')); });
+if(location.hash === '#admin') showAdmin();
+renderAdmin();
+</script>
+</body></html>
