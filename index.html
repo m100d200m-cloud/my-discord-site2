@@ -32,7 +32,10 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 <header>
  <a class="brand" href="#"><span class="mark">إ</span><span><strong>استشارات إدارية</strong><small>وتأسيس أنظمة الموارد البشرية الحديثة</small></span></a>
  <nav><a href="#home">الرئيسية</a><a href="#shop">المتجر</a><a href="#services">خدماتنا</a><a href="#custom-request">طلب منتج</a><a href="#careers">التوظيف</a></nav>
- <div class="actions"><button class="btn outline" onclick="openModal('auth')">تسجيل الدخول</button></div>
+ <div class="actions">
+    <button id="adminNavBtn" class="btn gold" style="display:none;" onclick="showAdmin()">لوحة المسؤولين</button>
+    <button class="btn outline" onclick="openModal('auth')">تسجيل الدخول</button>
+ </div>
 </header>
 <section class="hero" id="home"><div class="hero-inner">
  <div class="eyebrow">شريكك في التطوير الإداري والتميز المؤسسي</div>
@@ -42,7 +45,7 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
  <div class="stats"><div class="stat"><b>حلول</b><span>مصممة لاحتياج منشأتك</span></div><div class="stat"><b>وضوح</b><span>في الإجراءات والعمليات</span></div><div class="stat"><b>تطوير</b><span>مستمر للأداء المؤسسي</span></div></div>
 </div></section>
 
-<!-- لوحة الموظفين والمسؤولين (تظهر للصلاحيات المصرحة فقط) -->
+<!-- لوحة النشر للموظفين والمسؤولين -->
 <div class="wrap" style="padding-bottom: 0;">
  <div id="employeeSection" class="employee-panel">
     <h3>👨‍💼 لوحة النشر (إضافة منتج جديد)</h3>
@@ -91,9 +94,15 @@ footer{background:#0b1528;color:#dce3ed;padding:38px 5% 20px}.foot-grid{max-widt
 <footer><div class="foot-grid"><div><div class="brand"><span class="mark">إ</span><span><strong>استشارات إدارية</strong><small>وتأسيس أنظمة الموارد البشرية الحديثة</small></span></div><p>حلول إدارية ومنتجات عملية لدعم المنشآت وتطوير بيئات العمل.</p></div><div><strong>روابط سريعة</strong><p><a href="#shop">المتجر</a></p><p><a href="#services">خدماتنا</a></p></div><div><strong>تواصل معنا</strong><p>الواتساب: 0566613938</p></div></div><div class="copyright">© 2026 جميع الحقوق محفوظة · استشارات إدارية وتأسيس أنظمة الموارد البشرية الحديثة</div></footer>
 </div>
 
-<!-- لوحة التحكم السرية للمسؤولين (تفتح عبر #admin للرمز 2323 فقط) -->
+<!-- لوحة تحكم المسؤولين (تفتح تلقائياً عند إدخال الرمز السري للمسؤولين) -->
 <div id="admin" class="admin">
- <div class="adminbar"><b>لوحة تحكم المسؤولين (2323)</b><div><button class="btn outline" onclick="showStore()">العودة للموقع</button></div></div>
+ <div class="adminbar">
+    <b>لوحة تحكم المسؤولين</b>
+    <div>
+        <button class="btn danger" style="margin-left:10px;" onclick="logoutAdmin()">تسجيل خروج</button>
+        <button class="btn outline" onclick="showStore()">العودة للموقع</button>
+    </div>
+ </div>
  <div class="admin-content">
     <h2>1. إدارة طلبات المنتجات الواردة</h2>
     <table class="table">
@@ -143,22 +152,30 @@ function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 function handleAuth(e){
     e.preventDefault();
     const code = document.getElementById('loginCode').value.trim();
+    document.getElementById('loginCode').value = '';
     if(code === '2222'){
         isStaff = true; isAdmin = false;
         localStorage.setItem('is_staff', 'true'); localStorage.setItem('is_admin', 'false');
-        alert('تم تسجيل الدخول بنجاح!'); closeModal('auth'); checkPermissions();
+        closeModal('auth'); checkPermissions();
     } else if(code === '2323'){
         isAdmin = true; isStaff = true;
         localStorage.setItem('is_admin', 'true'); localStorage.setItem('is_staff', 'true');
-        alert('تم تسجيل الدخول كمسؤول! (أضف #admin في نهاية الرابط لفتح لوحة المسؤولين).'); closeModal('auth'); checkPermissions();
+        closeModal('auth'); checkPermissions();
+        showAdmin(); // فتح لوحة المسؤولين تلقائياً وفوراً
     } else {
         alert('رمز الدخول غير صحيح.');
     }
 }
 
+function logoutAdmin(){
+    isAdmin = false; isStaff = false;
+    localStorage.removeItem('is_admin'); localStorage.removeItem('is_staff');
+    checkPermissions(); showStore();
+}
+
 function checkPermissions(){
-    if(isStaff || isAdmin){ document.getElementById('employeeSection').classList.add('active'); }
-    else { document.getElementById('employeeSection').classList.remove('active'); }
+    document.getElementById('employeeSection').classList.toggle('active', isStaff || isAdmin);
+    document.getElementById('adminNavBtn').style.display = isAdmin ? 'inline-block' : 'none';
 }
 
 function addStoreProduct(e){
@@ -202,7 +219,6 @@ function submitJobApplication(e){
     alert('تم تقديم طلب التوظيف بنجاح!'); e.target.reset(); renderAdmin();
 }
 
-// قرارات التوظيف وإرسالها لخانة نتائج التوظيف الخاصة بالمسؤولين
 function decideJob(index, decision){
     const app = jobApps[index];
     jobResults.push({
@@ -215,10 +231,8 @@ function decideJob(index, decision){
     localStorage.setItem('job_apps', JSON.stringify(jobApps));
     localStorage.setItem('job_results', JSON.stringify(jobResults));
     renderAdmin();
-    alert('تم تسجيل القرار (' + decision + ') في خانة نتائج التوظيف.');
 }
 
-// دوال الحذف الخاصة بالمسؤولين (2323)
 function deleteCustomOrder(index){
     if(!isAdmin) return;
     customOrders.splice(index, 1);
@@ -237,12 +251,10 @@ function deleteStoreProduct(index){
     if(!isAdmin) return;
     products.splice(index, 1);
     localStorage.setItem('store_products', JSON.stringify(products));
-    renderProducts();
-    renderAdmin();
+    renderProducts(); renderAdmin();
 }
 
 function renderAdmin(){
-    // 1. طلبات المنتجات + زر الحذف
     document.getElementById('adminCustomOrders').innerHTML = customOrders.length ? customOrders.map((o, i) => `
         <tr>
             <td>${escapeHtml(o.product)}</td>
@@ -252,7 +264,6 @@ function renderAdmin(){
         </tr>
     `).join('') : '<tr><td colspan="4">لا توجد طلبات منتجات</td></tr>';
 
-    // 2. طلبات التوظيف المعلقة
     document.getElementById('adminJobApps').innerHTML = jobApps.length ? jobApps.map((j, i) => `
         <tr>
             <td>${escapeHtml(j.name)}</td>
@@ -265,7 +276,6 @@ function renderAdmin(){
         </tr>
     `).join('') : '<tr><td colspan="4">لا توجد طلبات توظيف جديدة</td></tr>';
 
-    // 3. نتائج التوظيف الخاصة بالمسؤولين فقط
     document.getElementById('adminJobResults').innerHTML = jobResults.length ? jobResults.map((r, i) => `
         <tr>
             <td>${escapeHtml(r.name)}</td>
@@ -276,7 +286,6 @@ function renderAdmin(){
         </tr>
     `).join('') : '<tr><td colspan="5">لا توجد نتائج توظيف مسجلة</td></tr>';
 
-    // 4. إدارة المنتجات المعروضة في المتجر
     document.getElementById('adminStoreProducts').innerHTML = products.length ? products.map((p, i) => `
         <tr>
             <td>${escapeHtml(p.name)}</td>
@@ -294,7 +303,7 @@ function showAdmin(){
     document.getElementById('store').style.display = 'none'; document.getElementById('admin').classList.add('active'); renderAdmin(); 
 }
 
-if(location.hash === '#admin') showAdmin();
+if(location.hash === '#admin' && isAdmin) showAdmin();
 renderProducts();
 checkPermissions();
 </script>
