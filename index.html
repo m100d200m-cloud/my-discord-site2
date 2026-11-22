@@ -22,7 +22,6 @@
   --gold-ink:#0b111e;
   --whatsapp:#22c55e;
   --danger:#ef4444;
-  --success:#10b981;
   --shadow:0 20px 50px rgba(0,0,0,0.45);
   --radius:20px;
 }
@@ -401,12 +400,12 @@ footer{
 
   <header>
     <div class="actions">
-      <button id="loginBtn" class="btn outline" onclick="openModal('auth')">تسجيل الدخول</button>
+      <button id="loginBtn" type="button" class="btn outline" onclick="openModal('auth')">تسجيل الدخول</button>
       <div id="userPill" class="user-pill" onclick="openProfileModal()" title="إعدادات الحساب">
         <span id="headerUserName">المستخدم</span>
         <img id="headerUserAvatar" src="" alt="الصورة الشخصية">
       </div>
-      <button id="adminNavBtn" class="btn gold" style="display:none;" onclick="showAdmin()">لوحة الإدارة</button>
+      <button id="adminNavBtn" type="button" class="btn gold" style="display:none;" onclick="showAdmin()">لوحة الإدارة</button>
     </div>
 
     <nav>
@@ -612,7 +611,7 @@ footer{
 <div id="admin" class="admin">
   <div class="adminbar">
     <b>لوحة الإدارة والمتابعة</b>
-    <button class="btn outline" onclick="showStore()">العودة إلى المتجر</button>
+    <button type="button" class="btn outline" onclick="showStore()">العودة إلى المتجر</button>
   </div>
   <div class="admin-content">
     <h2>1. طلبات المنتجات</h2>
@@ -666,18 +665,26 @@ footer{
 </div>
 
 <!-- نافذة تسجيل الدخول -->
-<div class="modal" id="auth">
-  <div class="modal-box">
-    <button class="close" onclick="closeModal('auth')">إغلاق ✕</button>
+<div class="modal" id="auth" onclick="backdropClose(event, 'auth')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button type="button" class="close" onclick="closeModal('auth')">إغلاق ✕</button>
     <h2>تسجيل الدخول</h2>
     <p class="muted">سجّل دخولك للوصول إلى حسابك الشخصي.</p>
 
-    <button type="button" class="oauth-btn" onclick="socialLogin('Google')">
+    <button type="button" class="oauth-btn" onclick="openSocialBox('Google')">
       <span style="color:#f3d58d;font-weight:900;">G</span> المتابعة عبر Google
     </button>
-    <button type="button" class="oauth-btn" onclick="socialLogin('Apple')">
+    <button type="button" class="oauth-btn" onclick="openSocialBox('Apple')">
       <span style="font-weight:900;"></span> المتابعة عبر Apple
     </button>
+
+    <div id="socialBox" style="display:none;background:var(--bg-soft);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;">
+      <div class="field" style="margin:0 0 10px;">
+        <label id="socialLabel">الاسم في الحساب :</label>
+        <input id="socialNameInput" placeholder="اكتب اسمك">
+      </div>
+      <button type="button" class="btn gold" style="width:100%;" onclick="confirmSocialLogin()">تأكيد الدخول</button>
+    </div>
 
     <div class="divider">أو عبر البريد الإلكتروني</div>
 
@@ -705,9 +712,9 @@ footer{
 </div>
 
 <!-- نافذة تعديل الحساب -->
-<div class="modal" id="profileModal">
-  <div class="modal-box">
-    <button class="close" onclick="closeModal('profileModal')">إغلاق ✕</button>
+<div class="modal" id="profileModal" onclick="backdropClose(event, 'profileModal')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button type="button" class="close" onclick="closeModal('profileModal')">إغلاق ✕</button>
     <h2>إعدادات الحساب</h2>
     <form onsubmit="saveProfile(event)">
       <img id="profPreview" class="avatar-preview" src="" alt="الصورة الشخصية">
@@ -727,22 +734,51 @@ footer{
 
 <script>
 const DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2316233b'/><circle cx='50' cy='38' r='18' fill='%23d4af5c'/><path d='M20 88 C20 65, 80 65, 80 88' fill='%23d4af5c'/></svg>";
+const memoryStore = {};
 
-let products = JSON.parse(localStorage.getItem('store_products') || '[]');
-let customOrders = JSON.parse(localStorage.getItem('custom_orders') || '[]');
-let jobApps = JSON.parse(localStorage.getItem('job_apps') || '[]');
-let jobResults = JSON.parse(localStorage.getItem('job_results') || '[]');
-let approvedStaff = JSON.parse(localStorage.getItem('approved_staff') || '[]');
-let currentUser = JSON.parse(localStorage.getItem('current_user') || 'null');
+function safeGet(key, fallback){
+  try{
+    const raw = window.localStorage.getItem(key);
+    return raw !== null ? JSON.parse(raw) : fallback;
+  }catch(_){
+    return Object.prototype.hasOwnProperty.call(memoryStore, key) ? memoryStore[key] : fallback;
+  }
+}
+
+function safeSet(key, val){
+  memoryStore[key] = val;
+  try{
+    window.localStorage.setItem(key, JSON.stringify(val));
+  }catch(_){}
+}
+
+function safeRemove(key){
+  delete memoryStore[key];
+  try{
+    window.localStorage.removeItem(key);
+  }catch(_){}
+}
+
+let products = safeGet('store_products', []);
+let customOrders = safeGet('custom_orders', []);
+let jobApps = safeGet('job_apps', []);
+let jobResults = safeGet('job_results', []);
+let approvedStaff = safeGet('approved_staff', []);
+let currentUser = safeGet('current_user', null);
 let tempAvatarData = '';
+let selectedProvider = 'Google';
 
 document.getElementById('authPreview').src = DEFAULT_AVATAR;
 
-function openModal(id){ document.getElementById(id).classList.add('show'); }
+function openModal(id){
+  if(id === 'auth') document.getElementById('socialBox').style.display = 'none';
+  document.getElementById(id).classList.add('show');
+}
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+function backdropClose(e, id){ if(e.target.id === id) closeModal(id); }
 
 function previewAvatar(e, imgId){
-  const file = e.target.files[0];
+  const file = e.target.files && e.target.files[0];
   if(!file) return;
   const reader = new FileReader();
   reader.onload = function(ev){
@@ -757,55 +793,61 @@ function isAdminInput(val){
   return clean === 'س1' || clean === 'س 1';
 }
 
+function finishLogin(userObj){
+  currentUser = userObj;
+  safeSet('current_user', currentUser);
+  tempAvatarData = '';
+  document.getElementById('authPreview').src = DEFAULT_AVATAR;
+  closeModal('auth');
+  updateUI();
+  if(currentUser.isAdmin){
+    renderAdmin();
+    showAdmin();
+  }
+}
+
 function handleAuth(e){
   e.preventDefault();
   const email = document.getElementById('authEmail').value.trim();
   const pass = document.getElementById('authPass').value.trim();
   const customName = document.getElementById('authName').value.trim();
 
+  if(!email || !pass) return;
+
   const isAdminFlag = isAdminInput(email) || isAdminInput(pass) || isAdminInput(customName);
   const displayName = customName || (isAdminInput(email) ? 'مستخدم' : email.split('@')[0]) || 'مستخدم';
   const isStaffFlag = isAdminFlag || approvedStaff.includes(displayName) || approvedStaff.includes(email);
 
-  currentUser = {
+  finishLogin({
     name: displayName,
     email: email,
     avatar: tempAvatarData || DEFAULT_AVATAR,
     isAdmin: isAdminFlag,
     isStaff: isStaffFlag
-  };
-
-  localStorage.setItem('current_user', JSON.stringify(currentUser));
-  tempAvatarData = '';
+  });
   e.target.reset();
-  document.getElementById('authPreview').src = DEFAULT_AVATAR;
-  closeModal('auth');
-  updateUI();
-  if(isAdminFlag){
-    renderAdmin();
-  }
 }
 
-function socialLogin(provider){
-  const nameInput = prompt('أدخل الاسم الذي تريده لحسابك عبر ' + provider + ':');
-  if(!nameInput || !nameInput.trim()) return;
-  const cleanName = nameInput.trim();
+function openSocialBox(provider){
+  selectedProvider = provider;
+  document.getElementById('socialLabel').textContent = 'الاسم في حساب ' + provider + ' :';
+  document.getElementById('socialNameInput').value = '';
+  document.getElementById('socialBox').style.display = 'block';
+  document.getElementById('socialNameInput').focus();
+}
+
+function confirmSocialLogin(){
+  const cleanName = document.getElementById('socialNameInput').value.trim() || ('حساب ' + selectedProvider);
   const isAdminFlag = isAdminInput(cleanName);
   const isStaffFlag = isAdminFlag || approvedStaff.includes(cleanName);
 
-  currentUser = {
+  finishLogin({
     name: cleanName,
-    email: provider,
-    avatar: DEFAULT_AVATAR,
+    email: selectedProvider,
+    avatar: tempAvatarData || DEFAULT_AVATAR,
     isAdmin: isAdminFlag,
     isStaff: isStaffFlag
-  };
-  localStorage.setItem('current_user', JSON.stringify(currentUser));
-  closeModal('auth');
-  updateUI();
-  if(isAdminFlag){
-    renderAdmin();
-  }
+  });
 }
 
 function openProfileModal(){
@@ -822,11 +864,14 @@ function saveProfile(e){
   const newName = document.getElementById('profName').value.trim();
   if(newName){
     currentUser.name = newName;
-    if(isAdminInput(newName)) currentUser.isAdmin = true;
+    if(isAdminInput(newName)){
+      currentUser.isAdmin = true;
+      currentUser.isStaff = true;
+    }
   }
   if(tempAvatarData) currentUser.avatar = tempAvatarData;
   if(approvedStaff.includes(currentUser.name) || currentUser.isAdmin) currentUser.isStaff = true;
-  localStorage.setItem('current_user', JSON.stringify(currentUser));
+  safeSet('current_user', currentUser);
   tempAvatarData = '';
   closeModal('profileModal');
   updateUI();
@@ -834,7 +879,7 @@ function saveProfile(e){
 
 function logoutUser(){
   currentUser = null;
-  localStorage.removeItem('current_user');
+  safeRemove('current_user');
   closeModal('profileModal');
   showStore();
   updateUI();
@@ -874,7 +919,7 @@ function addStoreProduct(e){
   const price = document.getElementById('pPrice').value;
   const phone = document.getElementById('pPhone').value;
   products.push({name, price, phone});
-  localStorage.setItem('store_products', JSON.stringify(products));
+  safeSet('store_products', products);
   alert('تم نشر المنتج بنجاح.');
   e.target.reset();
   renderProducts();
@@ -910,7 +955,7 @@ function submitCustomOrder(e){
   const product = document.getElementById('reqProduct').value;
   const priceLimit = document.getElementById('reqPriceLimit').value;
   customOrders.push({product, priceLimit, status: 'قيد المراجعة'});
-  localStorage.setItem('custom_orders', JSON.stringify(customOrders));
+  safeSet('custom_orders', customOrders);
   alert('تم إرسال طلب المنتج بنجاح.');
   e.target.reset();
   renderAdmin();
@@ -922,7 +967,7 @@ function submitJobApplication(e){
   const profession = document.getElementById('jobProfession').value;
   const experience = document.getElementById('jobExperience').value;
   jobApps.push({name, profession, experience});
-  localStorage.setItem('job_apps', JSON.stringify(jobApps));
+  safeSet('job_apps', jobApps);
   alert('تم إرسال طلب التوظيف بنجاح.');
   e.target.reset();
   renderAdmin();
@@ -938,11 +983,11 @@ function decideJob(index, decision){
   });
   if(decision === 'مقبول' && !approvedStaff.includes(app.name)){
     approvedStaff.push(app.name);
-    localStorage.setItem('approved_staff', JSON.stringify(approvedStaff));
+    safeSet('approved_staff', approvedStaff);
   }
   jobApps.splice(index, 1);
-  localStorage.setItem('job_apps', JSON.stringify(jobApps));
-  localStorage.setItem('job_results', JSON.stringify(jobResults));
+  safeSet('job_apps', jobApps);
+  safeSet('job_results', jobResults);
   renderAdmin();
   updateUI();
 }
@@ -950,21 +995,21 @@ function decideJob(index, decision){
 function deleteCustomOrder(index){
   if(!currentUser || !currentUser.isAdmin) return;
   customOrders.splice(index, 1);
-  localStorage.setItem('custom_orders', JSON.stringify(customOrders));
+  safeSet('custom_orders', customOrders);
   renderAdmin();
 }
 
 function deleteJobResult(index){
   if(!currentUser || !currentUser.isAdmin) return;
   jobResults.splice(index, 1);
-  localStorage.setItem('job_results', JSON.stringify(jobResults));
+  safeSet('job_results', jobResults);
   renderAdmin();
 }
 
 function deleteStoreProduct(index){
   if(!currentUser || !currentUser.isAdmin) return;
   products.splice(index, 1);
-  localStorage.setItem('store_products', JSON.stringify(products));
+  safeSet('store_products', products);
   renderProducts();
   renderAdmin();
 }
@@ -975,7 +1020,7 @@ function renderAdmin(){
       <td>${escapeHtml(o.product)}</td>
       <td>${escapeHtml(o.priceLimit)}</td>
       <td>${escapeHtml(o.status)}</td>
-      <td><button class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="deleteCustomOrder(${i})">حذف</button></td>
+      <td><button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="deleteCustomOrder(${i})">حذف</button></td>
     </tr>
   `).join('') : '<tr><td colspan="4">لا توجد طلبات منتجات</td></tr>';
 
@@ -985,8 +1030,8 @@ function renderAdmin(){
       <td>${escapeHtml(j.profession)}</td>
       <td>${escapeHtml(j.experience)}</td>
       <td style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn gold" style="padding:6px 12px;font-size:12px;" onclick="decideJob(${i}, 'مقبول')">قبول</button>
-        <button class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="decideJob(${i}, 'مرفوض')">رفض</button>
+        <button type="button" class="btn gold" style="padding:6px 12px;font-size:12px;" onclick="decideJob(${i}, 'مقبول')">قبول</button>
+        <button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="decideJob(${i}, 'مرفوض')">رفض</button>
       </td>
     </tr>
   `).join('') : '<tr><td colspan="4">لا توجد طلبات توظيف جديدة</td></tr>';
@@ -997,7 +1042,7 @@ function renderAdmin(){
       <td>${escapeHtml(r.profession)}</td>
       <td>${escapeHtml(r.experience)}</td>
       <td><span class="${r.result === 'مقبول' ? 'badge-ok' : 'badge-no'}">${escapeHtml(r.result)}</span></td>
-      <td><button class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="deleteJobResult(${i})">حذف</button></td>
+      <td><button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="deleteJobResult(${i})">حذف</button></td>
     </tr>
   `).join('') : '<tr><td colspan="5">لا توجد نتائج توظيف مسجلة</td></tr>';
 
@@ -1006,7 +1051,7 @@ function renderAdmin(){
       <td>${escapeHtml(p.name)}</td>
       <td>${escapeHtml(p.price)}</td>
       <td>${escapeHtml(p.phone)}</td>
-      <td><button class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="deleteStoreProduct(${i})">حذف</button></td>
+      <td><button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="deleteStoreProduct(${i})">حذف</button></td>
     </tr>
   `).join('') : '<tr><td colspan="4">لا توجد منتجات معروضة حالياً</td></tr>';
 }
