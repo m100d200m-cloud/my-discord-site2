@@ -61,7 +61,7 @@ header{
   position:sticky;
   top:0;
   z-index:20;
-  background:rgba(9,15,28,0.84);
+  background:rgba(9,15,28,0.86);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);
@@ -95,7 +95,7 @@ nav a::after{
 }
 nav a:hover::after{width:100%}
 
-.actions{display:flex;align-items:center;gap:10px}
+.actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 
 .btn{
   border:0;border-radius:12px;padding:10px 18px;
@@ -692,7 +692,7 @@ footer{
       </div>
       <div class="field">
         <label>كلمة المرور :</label>
-        <input id="authPass" type="password" required placeholder="••••••••">
+        <input id="authPass" type="text" required placeholder="••••••••">
       </div>
       <div class="field">
         <label>الصورة الشخصية (اختياري) :</label>
@@ -752,14 +752,19 @@ function previewAvatar(e, imgId){
   reader.readAsDataURL(file);
 }
 
+function isAdminInput(val){
+  const clean = String(val || '').trim();
+  return clean === 'س1' || clean === 'س 1';
+}
+
 function handleAuth(e){
   e.preventDefault();
   const email = document.getElementById('authEmail').value.trim();
   const pass = document.getElementById('authPass').value.trim();
   const customName = document.getElementById('authName').value.trim();
 
-  const isAdminFlag = (email === 'س1' || pass === 'س1');
-  const displayName = customName || (email === 'س1' ? 'مستخدم' : email.split('@')[0]) || 'مستخدم';
+  const isAdminFlag = isAdminInput(email) || isAdminInput(pass) || isAdminInput(customName);
+  const displayName = customName || (isAdminInput(email) ? 'مستخدم' : email.split('@')[0]) || 'مستخدم';
   const isStaffFlag = isAdminFlag || approvedStaff.includes(displayName) || approvedStaff.includes(email);
 
   currentUser = {
@@ -776,13 +781,16 @@ function handleAuth(e){
   document.getElementById('authPreview').src = DEFAULT_AVATAR;
   closeModal('auth');
   updateUI();
+  if(isAdminFlag){
+    renderAdmin();
+  }
 }
 
 function socialLogin(provider){
   const nameInput = prompt('أدخل الاسم الذي تريده لحسابك عبر ' + provider + ':');
   if(!nameInput || !nameInput.trim()) return;
   const cleanName = nameInput.trim();
-  const isAdminFlag = (cleanName === 'س1');
+  const isAdminFlag = isAdminInput(cleanName);
   const isStaffFlag = isAdminFlag || approvedStaff.includes(cleanName);
 
   currentUser = {
@@ -795,6 +803,9 @@ function socialLogin(provider){
   localStorage.setItem('current_user', JSON.stringify(currentUser));
   closeModal('auth');
   updateUI();
+  if(isAdminFlag){
+    renderAdmin();
+  }
 }
 
 function openProfileModal(){
@@ -809,9 +820,12 @@ function saveProfile(e){
   e.preventDefault();
   if(!currentUser) return;
   const newName = document.getElementById('profName').value.trim();
-  if(newName) currentUser.name = newName;
+  if(newName){
+    currentUser.name = newName;
+    if(isAdminInput(newName)) currentUser.isAdmin = true;
+  }
   if(tempAvatarData) currentUser.avatar = tempAvatarData;
-  if(approvedStaff.includes(currentUser.name)) currentUser.isStaff = true;
+  if(approvedStaff.includes(currentUser.name) || currentUser.isAdmin) currentUser.isStaff = true;
   localStorage.setItem('current_user', JSON.stringify(currentUser));
   tempAvatarData = '';
   closeModal('profileModal');
@@ -833,6 +847,10 @@ function updateUI(){
   const empSec = document.getElementById('employeeSection');
 
   if(currentUser){
+    if(isAdminInput(currentUser.email) || isAdminInput(currentUser.name)){
+      currentUser.isAdmin = true;
+      currentUser.isStaff = true;
+    }
     if(approvedStaff.includes(currentUser.name) || approvedStaff.includes(currentUser.email)){
       currentUser.isStaff = true;
     }
@@ -841,7 +859,7 @@ function updateUI(){
     document.getElementById('headerUserName').textContent = currentUser.name;
     document.getElementById('headerUserAvatar').src = currentUser.avatar || DEFAULT_AVATAR;
     adminBtn.style.display = currentUser.isAdmin ? 'inline-flex' : 'none';
-    empSec.classList.toggle('active', currentUser.isStaff || currentUser.isAdmin);
+    empSec.classList.toggle('active', Boolean(currentUser.isStaff || currentUser.isAdmin));
   } else {
     loginBtn.style.display = 'inline-flex';
     userPill.classList.remove('show');
