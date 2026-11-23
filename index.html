@@ -60,11 +60,11 @@ header{
   position:sticky;
   top:0;
   z-index:20;
-  background:rgba(255,255,255,0.94);
+  background:rgba(255,255,255,0.95);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
-  padding:14px 6%;
+  padding:12px 6%;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -73,18 +73,16 @@ header{
 }
 
 .brand{display:flex;align-items:center;gap:12px}
-.mark{
-  width:46px;height:46px;border-radius:14px;
-  background:linear-gradient(135deg,var(--navy),#1e3a5f);
-  border:1px solid var(--gold);
-  color:#f3d58d;
-  display:grid;place-items:center;
-  font-weight:900;font-size:21px;
+.logo-svg{
+  width:52px;height:52px;flex-shrink:0;
+  border-radius:14px;
+  box-shadow:0 8px 20px rgba(15,41,66,0.14);
 }
-.brand strong{display:block;font-size:15px;font-weight:800;color:var(--navy)}
-.brand small{display:block;color:var(--muted);font-size:11px}
+.brand-text strong{display:block;font-size:15px;font-weight:900;color:var(--navy);line-height:1.3}
+.brand-text .ref-no{display:inline-block;font-size:11px;font-weight:800;color:#8f6923;background:#fef9ec;border:1px solid rgba(180,138,60,0.35);padding:1px 8px;border-radius:6px;margin-top:2px;letter-spacing:0.3px}
+.brand-text small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
 
-nav{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:700;color:var(--muted)}
+nav{display:flex;align-items:center;gap:22px;font-size:13px;font-weight:700;color:var(--muted)}
 nav a{position:relative;padding:4px 0;transition:color .2s}
 nav a:hover{color:var(--navy)}
 nav a::after{
@@ -152,7 +150,7 @@ nav a:hover::after{width:100%}
 }
 .hero-inner{
   max-width:1180px;margin:auto;
-  display:grid;grid-template-columns:1.3fr 0.9fr;gap:36px;align-items:center;
+  display:grid;grid-template-columns:1.25fr 0.95fr;gap:32px;align-items:center;
 }
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
@@ -162,50 +160,32 @@ nav a:hover::after{width:100%}
   color:#8f6923;font-size:12px;font-weight:700;
 }
 .hero h1{
-  font-size:clamp(30px,4.4vw,50px);
+  font-size:clamp(30px,4.2vw,48px);
   font-weight:900;line-height:1.35;
   margin:16px 0 14px;color:var(--navy);
 }
 .hero p{color:var(--muted);font-size:15px;margin:0 0 26px;max-width:620px}
 .hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
 
-.hero-panel{
+.hero-showcase{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.mini-tile{
   background:#ffffff;
   border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:24px;
+  border-radius:16px;
+  padding:20px;
   box-shadow:var(--shadow);
+  transition:transform .2s ease,border-color .2s ease;
 }
-.hero-panel h3{margin:0 0 14px;font-size:17px;color:var(--navy)}
-.quick-options{display:grid;gap:10px}
-.quick-opt{
-  width:100%;
-  text-align:right;
-  background:var(--bg);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:14px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  cursor:pointer;
-  font-weight:700;
-  font-size:13.5px;
-  color:var(--navy);
-  transition:all .2s ease;
-}
-.quick-opt:hover{
-  background:#fefce8;
-  border-color:var(--gold);
-  transform:translateX(-3px);
-}
-.quick-opt span.arrow{
-  background:var(--navy);
-  color:#f3d58d;
-  padding:3px 10px;
-  border-radius:999px;
-  font-size:11px;
-}
+.mini-tile:hover{transform:translateY(-3px);border-color:var(--gold)}
+.mini-tile.span-2{grid-column:1/-1;background:linear-gradient(135deg,var(--navy),#193554);color:#fff}
+.mini-tile.span-2 p{color:#cbd5e1}
+.mini-tile b{display:block;font-size:15px;margin-bottom:6px;color:var(--navy)}
+.mini-tile.span-2 b{color:#f3d58d}
+.mini-tile p{margin:0;font-size:12.5px;color:var(--muted)}
 
 .wrap{max-width:1180px;margin:auto;padding:60px 24px}
 .section-head{
@@ -311,6 +291,16 @@ nav a:hover::after{width:100%}
 }
 .saved-card-box small{color:#f3d58d;display:block;font-size:11px}
 
+.invoice-banner{
+  background:#fef9ec;
+  border:1px solid rgba(180,138,60,0.4);
+  border-radius:14px;
+  padding:14px 16px;
+  margin-bottom:14px;
+}
+.invoice-banner strong{color:var(--navy);display:block;font-size:15px}
+.invoice-banner span{color:#8f6923;font-weight:800;font-size:16px}
+
 footer{
   background:var(--navy);
   color:#cbd5e1;
@@ -341,7 +331,7 @@ footer{
   border:1px solid var(--line);
   border-radius:20px;
   padding:26px;
-  width:min(500px,100%);
+  width:min(520px,100%);
   max-height:92vh;overflow:auto;
   box-shadow:0 24px 60px rgba(15,23,42,0.18);
 }
@@ -407,12 +397,12 @@ footer{
 .admin-content{max-width:1180px;margin:auto;padding:34px 24px}
 .admin-content h2{margin:26px 0 12px;font-size:19px;color:var(--navy)}
 .table-wrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:#ffffff;box-shadow:var(--shadow)}
-.table{width:100%;border-collapse:collapse;min-width:620px}
+.table{width:100%;border-collapse:collapse;min-width:680px}
 .table th{background:var(--surface-2);color:var(--navy);font-weight:800}
 .table th,.table td{padding:13px 15px;text-align:right;border-bottom:1px solid var(--line-soft);font-size:13px}
 .table tr:last-child td{border-bottom:0}
 .badge-ok{background:#dcfce7;color:#166534;padding:4px 10px;border-radius:999px;font-weight:700;font-size:11.5px}
-.badge-no{background:#fee2e2;color:#991b1b;padding:4px 10px;border-radius:999px;font-weight:700;font-size:11.5px}
+.badge-paid{background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:999px;font-weight:700;font-size:11.5px}
 .badge-done{background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:999px;font-weight:700;font-size:11.5px}
 .muted{color:var(--muted);font-size:13px}
 .err-text{color:var(--danger);font-size:12px;font-weight:700;display:none;margin-top:4px}
@@ -423,10 +413,10 @@ footer{
 }
 @media(max-width:760px){
   nav{display:none}
-  .grid,.foot-grid,.row-2{grid-template-columns:1fr}
+  .grid,.foot-grid,.row-2,.hero-showcase{grid-template-columns:1fr}
   .hero{padding:58px 5%}
   header{padding:12px 4%}
-  .brand strong{font-size:13px}
+  .brand-text strong{font-size:13px}
   .btn{padding:9px 14px;font-size:12px}
 }
 </style>
@@ -435,7 +425,7 @@ footer{
 
 <div id="store">
   <div class="top-strip">
-    <span><strong>استشارات إدارية</strong> · منصة الخدمات والأنظمة الإدارية والموارد البشرية</span>
+    <span><strong>استشارات إدارية</strong> · بإشراف سامي المرضي · السجل: <strong>FL-609311436</strong></span>
     <span>المملكة العربية السعودية · بوابة الخدمات</span>
   </div>
 
@@ -446,7 +436,7 @@ footer{
         <span id="headerUserName">المستخدم</span>
         <img id="headerUserAvatar" src="" alt="الصورة الشخصية">
       </div>
-      <button type="button" class="btn outline" onclick="openCardModal()">💳 البطاقة البنكية</button>
+      <button type="button" class="btn outline" onclick="openCardModal()">💳 البطاقة</button>
       <button id="adminNavBtn" type="button" class="btn gold" style="display:none;" onclick="showAdmin()">لوحة الإدارة</button>
     </div>
 
@@ -455,14 +445,19 @@ footer{
       <a href="#shop">المتجر</a>
       <a href="#services">خدماتنا</a>
       <a href="#custom-request">طلب منتج</a>
-      <a href="#careers">التوظيف</a>
     </nav>
 
     <a class="brand" href="#home">
-      <span class="mark">إ</span>
-      <span>
+      <svg class="logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="شعار سامي المرضي">
+        <rect width="64" height="64" rx="16" fill="#0f2942"/>
+        <rect x="3" y="3" width="58" height="58" rx="13.5" stroke="#cfa349" stroke-width="1.5"/>
+        <path d="M18 22H36C39.3137 22 42 24.6863 42 28C42 31.3137 39.3137 34 36 34H26C22.6863 34 20 36.6863 20 40C20 43.3137 22.6863 46 26 46H46" stroke="#f3d58d" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="46" cy="22" r="4" fill="#cfa349"/>
+      </svg>
+      <span class="brand-text">
         <strong>استشارات إدارية</strong>
-        <small>الموارد البشرية الحديثة</small>
+        <span class="ref-no">FL-609311436</span>
+        <small>سامي المرضي · الموارد البشرية الحديثة</small>
       </span>
     </a>
   </header>
@@ -470,31 +465,28 @@ footer{
   <section class="hero" id="home">
     <div class="hero-inner">
       <div>
-        <span class="eyebrow">بوابة الخدمات الإدارية وتطوير الموارد البشرية</span>
+        <span class="eyebrow">بوابة الاستشارات الإدارية وتطوير الموارد البشرية</span>
         <h1>نرتّب أعمالك، ونطوّر رأس مالك البشري</h1>
-        <p>من الاستشارات الإدارية وتصميم الهياكل إلى تأسيس أنظمة الموارد البشرية الحديثة، نوفر لك منتجات وخدمات منظمة تدعم كفاءة العمل المؤسسي.</p>
+        <p>منصة متكاملة بإدارة سامي المرضي لتقديم الاستشارات الإدارية، وهيكلة المنشآت، وتأسيس أنظمة الموارد البشرية والمنتجات الإدارية.</p>
         <div class="hero-buttons">
           <a class="btn navy-btn" href="#shop">تصفح المتجر</a>
           <a class="btn outline" href="#custom-request">طلب منتج</a>
-          <button type="button" class="btn gold" onclick="openCardModal()">إضافة بطاقة للدفع</button>
+          <button type="button" class="btn gold" onclick="openPayInvoiceModal()">الدفع الإلكتروني</button>
         </div>
       </div>
 
-      <div class="hero-panel">
-        <h3>الخدمات والوصول السريع</h3>
-        <div class="quick-options">
-          <a href="#services" class="quick-opt">
-            <span>الاستشارات والهيكلة الإدارية</span>
-            <span class="arrow">استعراض</span>
-          </a>
-          <a href="#shop" class="quick-opt">
-            <span>أنظمة الموارد البشرية والمنتجات</span>
-            <span class="arrow">المتجر</span>
-          </a>
-          <a href="#custom-request" class="quick-opt">
-            <span>متابعة الطلبات والخدمات</span>
-            <span class="arrow">اطلب الآن</span>
-          </a>
+      <div class="hero-showcase">
+        <div class="mini-tile">
+          <b>الاستشارات الإدارية</b>
+          <p>تطوير الهياكل التنظيمية وتحسين الإجراءات.</p>
+        </div>
+        <div class="mini-tile">
+          <b>الموارد البشرية</b>
+          <p>سياسات ولوائح وأنظمة عمل مؤسسية.</p>
+        </div>
+        <div class="mini-tile span-2">
+          <b>الدفع الإلكتروني والطلبات</b>
+          <p>إضافة البطاقة مرة واحدة، اعتماد المبلغ من الإدارة، وإتمام الدفع برمز تحقق آمن.</p>
         </div>
       </div>
     </div>
@@ -525,13 +517,13 @@ footer{
     <!-- قسم طلبات المنتجات للموظفين والمسؤولين -->
     <div id="staffOrdersPanel" class="staff-panel">
       <h3>طلبات المنتجات الواردة</h3>
-      <p class="muted">متابعة الطلبات وفتح شات أو استلام الخدمة وتحديد المستلم.</p>
+      <p class="muted">متابعة الطلبات وفتح شات أو استلام الخدمة وتسجيل اسم المستلم.</p>
       <div class="table-wrap" style="margin-top:14px;">
         <table class="table">
           <thead>
             <tr>
-              <th>المنتج / الطلب</th>
-              <th>النوع / الدفع</th>
+              <th>المنتج المرغوب</th>
+              <th>المبلغ المحدد</th>
               <th>ملف PDF</th>
               <th>الحالة</th>
               <th>مستلم الخدمة</th>
@@ -552,9 +544,12 @@ footer{
       <div>
         <span class="tag">المتجر</span>
         <h2>المنتجات المعروضة</h2>
-        <p>يمكنك الشراء مباشرة بالبطاقة البنكية أو التواصل عبر الواتساب.</p>
+        <p>اختر المنتج المناسب للتواصل المباشر عبر الواتساب أو الدفع الإلكتروني.</p>
       </div>
-      <button type="button" class="btn outline" onclick="openCardModal()">💳 إدارة البطاقة البنكية</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="btn outline" onclick="openCardModal()">💳 البطاقة المحفوظة</button>
+        <button type="button" class="btn gold" onclick="openPayInvoiceModal()">إتمام الدفع برمز تحقق</button>
+      </div>
     </div>
     <div class="grid" id="productsGrid">
       <div class="empty-box">
@@ -619,40 +614,20 @@ footer{
     </form>
   </section>
 
-  <!-- طلب توظيف -->
-  <section class="wrap" id="careers">
-    <div class="section-head">
-      <div>
-        <span class="tag">التوظيف</span>
-        <h2>طلب توظيف</h2>
-        <p>أدخل بياناتك للتقديم على الوظائف المتاحة.</p>
-      </div>
-    </div>
-    <form class="form-box" onsubmit="submitJobApplication(event)">
-      <div class="field">
-        <label>اسمك :</label>
-        <input id="jobName" required placeholder="الاسم الكامل">
-      </div>
-      <div class="field">
-        <label>مهنتك :</label>
-        <input id="jobProfession" required placeholder="المهنة أو التخصص">
-      </div>
-      <div class="field">
-        <label>خبرتك :</label>
-        <textarea id="jobExperience" rows="3" required placeholder="نبذة عن خبراتك"></textarea>
-      </div>
-      <button class="btn gold" type="submit" style="margin-top:10px;">تقديم طلب التوظيف</button>
-    </form>
-  </section>
-
   <footer>
     <div class="foot-grid">
       <div>
         <div class="brand" style="margin-bottom:10px;">
-          <span class="mark">إ</span>
-          <span>
+          <svg class="logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="شعار سامي المرضي">
+            <rect width="64" height="64" rx="16" fill="#163554"/>
+            <rect x="3" y="3" width="58" height="58" rx="13.5" stroke="#cfa349" stroke-width="1.5"/>
+            <path d="M18 22H36C39.3137 22 42 24.6863 42 28C42 31.3137 39.3137 34 36 34H26C22.6863 34 20 36.6863 20 40C20 43.3137 22.6863 46 26 46H46" stroke="#f3d58d" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="46" cy="22" r="4" fill="#cfa349"/>
+          </svg>
+          <span class="brand-text">
             <strong style="color:#fff;">استشارات إدارية</strong>
-            <small style="color:#cbd5e1;">وتأسيس أنظمة الموارد البشرية الحديثة</small>
+            <span class="ref-no">FL-609311436</span>
+            <small style="color:#cbd5e1;">سامي المرضي · الموارد البشرية الحديثة</small>
           </span>
         </div>
         <p>منصة للخدمات والمنتجات الإدارية وتطوير أنظمة الموارد البشرية.</p>
@@ -662,32 +637,32 @@ footer{
         <p><a href="#shop">المتجر</a></p>
         <p><a href="#services">خدماتنا</a></p>
         <p><a href="#custom-request">طلب منتج</a></p>
-        <p><a href="#careers">التوظيف</a></p>
       </div>
       <div>
         <strong>التواصل</strong>
         <p>الواتساب: 0566613938</p>
+        <p>الرقم المرجعي: FL-609311436</p>
       </div>
     </div>
-    <div class="copyright">© 2026 جميع الحقوق محفوظة · استشارات إدارية وتأسيس أنظمة الموارد البشرية الحديثة</div>
+    <div class="copyright">© 2026 جميع الحقوق محفوظة · سامي المرضي · FL-609311436</div>
   </footer>
 </div>
 
 <!-- لوحة الإدارة -->
 <div id="admin" class="admin">
   <div class="adminbar">
-    <b>لوحة الإدارة</b>
+    <b>لوحة الإدارة · FL-609311436</b>
     <button type="button" class="btn outline" onclick="showStore()">العودة للموقع</button>
   </div>
   <div class="admin-content">
-    <h2>1. طلبات المنتجات والمشتريات</h2>
+    <h2>1. طلبات المنتجات وتحديد المبالغ</h2>
     <div class="table-wrap">
       <table class="table">
         <thead>
           <tr>
-            <th>المنتج / الطلب</th>
-            <th>النوع / الدفع</th>
+            <th>المنتج المرغوب</th>
             <th>ملف PDF</th>
+            <th>المبلغ المحدد</th>
             <th>الحالة</th>
             <th>مستلم الخدمة</th>
             <th>الإجراءات</th>
@@ -699,31 +674,7 @@ footer{
       </table>
     </div>
 
-    <h2>2. طلبات التوظيف</h2>
-    <div class="table-wrap">
-      <table class="table">
-        <thead>
-          <tr><th>الاسم</th><th>المهنة</th><th>الخبرة</th><th>القرار</th></tr>
-        </thead>
-        <tbody id="adminJobApps">
-          <tr><td colspan="4">لا توجد طلبات توظيف جديدة</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h2>3. نتائج التوظيف</h2>
-    <div class="table-wrap">
-      <table class="table">
-        <thead>
-          <tr><th>الاسم</th><th>المهنة</th><th>الخبرة</th><th>النتيجة</th><th>إجراء</th></tr>
-        </thead>
-        <tbody id="adminJobResults">
-          <tr><td colspan="5">لا توجد نتائج توظيف مسجلة</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h2>4. المنتجات المعروضة</h2>
+    <h2>2. المنتجات المعروضة</h2>
     <div class="table-wrap">
       <table class="table">
         <thead>
@@ -737,12 +688,12 @@ footer{
   </div>
 </div>
 
-<!-- نافذة تسجيل الدخول -->
+<!-- نافذة تسجيل الدخول / إنشاء حساب -->
 <div class="modal" id="auth" onclick="backdropClose(event, 'auth')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <button type="button" class="close" onclick="closeModal('auth')">إغلاق ✕</button>
-    <h2>تسجيل الدخول</h2>
-    <p class="muted">أدخل بريداً إلكترونياً صالحاً وكلمة المرور للدخول.</p>
+    <h2>تسجيل الدخول / إنشاء حساب</h2>
+    <p class="muted">أدخل بريداً إلكترونياً صالحاً وكلمة المرور مع بياناتك أو خبراتك.</p>
 
     <button type="button" class="oauth-btn" onclick="openSocialBox('Google')">
       <span style="color:#8f6923;font-weight:900;">G</span> المتابعة عبر Google
@@ -756,9 +707,17 @@ footer{
         <label id="socialLabel">الاسم في الحساب :</label>
         <input id="socialNameInput" placeholder="اكتب اسمك">
       </div>
-      <div class="field" style="margin:0 0 10px;">
+      <div class="field" style="margin:0 0 8px;">
         <label>البريد الإلكتروني الصالح :</label>
         <input id="socialEmailInput" type="email" placeholder="name@example.com">
+      </div>
+      <div class="field" style="margin:0 0 8px;">
+        <label>الخبرات (اختياري) :</label>
+        <textarea id="socialExpInput" rows="2" placeholder="اكتب خبراتك"></textarea>
+      </div>
+      <div class="field" style="margin:0 0 10px;">
+        <label>ملف الخبرات PDF (اختياري) :</label>
+        <input id="socialPdfInput" type="file" accept="application/pdf,.pdf">
       </div>
       <button type="button" class="btn gold" style="width:100%;" onclick="confirmSocialLogin()">تأكيد الدخول</button>
     </div>
@@ -781,6 +740,14 @@ footer{
         <span id="passError" class="err-text">يرجى إدخال كلمة المرور</span>
       </div>
       <div class="field">
+        <label>الخبرات (اختياري) :</label>
+        <textarea id="authExperience" rows="2" placeholder="اكتب ملخص خبراتك العملية"></textarea>
+      </div>
+      <div class="field">
+        <label>إرفاق الخبرات بملف PDF (اختياري) :</label>
+        <input id="authPdfInput" type="file" accept="application/pdf,.pdf" onchange="handleAuthPdf(event)">
+      </div>
+      <div class="field">
         <label>الصورة الشخصية (اختياري) :</label>
         <input id="authAvatarInput" type="file" accept="image/*" onchange="previewAvatar(event, 'authPreview')">
         <img id="authPreview" class="avatar-preview" src="" alt="معاينة الصورة">
@@ -790,23 +757,23 @@ footer{
   </div>
 </div>
 
-<!-- نافذة البطاقة البنكية -->
+<!-- نافذة البطاقة البنكية (تُضاف وتُحفظ مرة واحدة) -->
 <div class="modal" id="cardModal" onclick="backdropClose(event, 'cardModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <button type="button" class="close" onclick="closeModal('cardModal')">إغلاق ✕</button>
-    <h2>البطاقة البنكية للدفع</h2>
-    <p class="muted">أضف بطاقتك لإتمام عمليات الشراء من المتجر بسهولة.</p>
+    <h2>البطاقة البنكية</h2>
 
     <div id="savedCardDisplay" style="display:none;" class="saved-card-box">
       <div>
-        <small>البطاقة المحفوظة</small>
+        <small>البطاقة محفوظة مسبقاً</small>
         <strong id="savedCardMask">•••• •••• •••• 0000</strong>
         <div id="savedCardHolder" style="font-size:12px;color:#cbd5e1;"></div>
       </div>
-      <button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="removeSavedCard()">إزالة</button>
+      <button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="removeSavedCard()">حذف البطاقة</button>
     </div>
 
-    <form onsubmit="savePaymentCard(event)">
+    <form id="cardForm" onsubmit="savePaymentCard(event)">
+      <p class="muted">أضف بيانات بطاقتك لحفظها مرة واحدة واستخدامها في الدفع.</p>
       <div class="field">
         <label>اسم حامل البطاقة :</label>
         <input id="cardHolder" required placeholder="الاسم كما يظهر على البطاقة">
@@ -830,6 +797,35 @@ footer{
   </div>
 </div>
 
+<!-- نافذة الدفع الإلكتروني وتحديد المبلغ ورمز التحقق -->
+<div class="modal" id="payModal" onclick="backdropClose(event, 'payModal')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button type="button" class="close" onclick="closeModal('payModal')">إغلاق ✕</button>
+    <h2>الدفع الإلكتروني</h2>
+
+    <div class="invoice-banner">
+      <strong id="payOrderLabel">اختر الطلب المحدد من الإدارة</strong>
+      <span id="payAmountDisplay">0 ر.س</span>
+    </div>
+
+    <form onsubmit="completeElectronicPayment(event)">
+      <div class="field">
+        <label>الطلب المحدد للدفع :</label>
+        <select id="payOrderSelect" onchange="syncPayOrderPreview()"></select>
+      </div>
+      <div class="field">
+        <label>البطاقة المستخدمة :</label>
+        <input id="payCardInfo" readonly placeholder="لا توجد بطاقة محفوظة">
+      </div>
+      <div class="field">
+        <label>رمز التحقق :</label>
+        <input id="payOtpCode" required placeholder="أدخل رمز التحقق">
+      </div>
+      <button class="btn gold" type="submit" style="width:100%;margin-top:8px;">تأكيد الدفع</button>
+    </form>
+  </div>
+</div>
+
 <!-- نافذة تعديل الحساب -->
 <div class="modal" id="profileModal" onclick="backdropClose(event, 'profileModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
@@ -845,8 +841,12 @@ footer{
         <label>الاسم :</label>
         <input id="profName" required>
       </div>
+      <div class="field">
+        <label>الخبرات :</label>
+        <textarea id="profExperience" rows="2" placeholder="خبراتك"></textarea>
+      </div>
+      <div id="profPdfLinkWrap" style="margin-bottom:10px;"></div>
       <button class="btn gold" type="submit" style="width:100%;margin-top:8px;">حفظ التعديلات</button>
-      <button type="button" class="btn outline" style="width:100%;margin-top:8px;" onclick="closeModal('profileModal');openCardModal();">💳 إعدادات البطاقة البنكية</button>
       <button type="button" class="btn danger" style="width:100%;margin-top:8px;" onclick="logoutUser()">تسجيل الخروج</button>
     </form>
   </div>
@@ -894,15 +894,14 @@ function safeRemove(key){
 
 let products = safeGet('store_products', []);
 let customOrders = safeGet('custom_orders', []);
-let jobApps = safeGet('job_apps', []);
-let jobResults = safeGet('job_results', []);
 let approvedStaff = safeGet('approved_staff', []);
 let currentUser = safeGet('current_user', null);
 let savedCard = safeGet('saved_payment_card', null);
 let tempAvatarData = '';
+let tempAuthPdfName = '';
+let tempAuthPdfData = '';
 let selectedProvider = 'Google';
 let activeChatOrderIndex = null;
-let pendingBuyIndex = null;
 
 document.getElementById('authPreview').src = DEFAULT_AVATAR;
 
@@ -929,6 +928,17 @@ function previewAvatar(e, imgId){
   reader.readAsDataURL(file);
 }
 
+function handleAuthPdf(e){
+  const file = e.target.files && e.target.files[0];
+  if(!file){ tempAuthPdfName = ''; tempAuthPdfData = ''; return; }
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    tempAuthPdfName = file.name;
+    tempAuthPdfData = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
 function isValidEmail(email){
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email || '').trim());
 }
@@ -946,6 +956,8 @@ function finishLogin(userObj){
   currentUser = userObj;
   safeSet('current_user', currentUser);
   tempAvatarData = '';
+  tempAuthPdfName = '';
+  tempAuthPdfData = '';
   document.getElementById('authPreview').src = DEFAULT_AVATAR;
   closeModal('auth');
   updateUI();
@@ -961,6 +973,7 @@ function handleAuth(e){
   const email = document.getElementById('authEmail').value.trim();
   const pass = document.getElementById('authPass').value.trim();
   const customName = document.getElementById('authName').value.trim();
+  const experience = document.getElementById('authExperience').value.trim();
 
   const emailErr = document.getElementById('emailError');
   const passErr = document.getElementById('passError');
@@ -984,6 +997,9 @@ function handleAuth(e){
   finishLogin({
     name: displayName,
     email: email,
+    experience: experience,
+    cvName: tempAuthPdfName,
+    cvData: tempAuthPdfData,
     avatar: tempAvatarData || DEFAULT_AVATAR,
     isAdmin: isAdminFlag,
     isStaff: isStaffFlag
@@ -996,6 +1012,7 @@ function openSocialBox(provider){
   document.getElementById('socialLabel').textContent = 'الاسم في حساب ' + provider + ' :';
   document.getElementById('socialNameInput').value = '';
   document.getElementById('socialEmailInput').value = '';
+  document.getElementById('socialExpInput').value = '';
   document.getElementById('socialBox').style.display = 'block';
   document.getElementById('socialNameInput').focus();
 }
@@ -1003,6 +1020,8 @@ function openSocialBox(provider){
 function confirmSocialLogin(){
   const cleanName = document.getElementById('socialNameInput').value.trim();
   const cleanEmail = document.getElementById('socialEmailInput').value.trim();
+  const expText = document.getElementById('socialExpInput').value.trim();
+  const pdfFile = document.getElementById('socialPdfInput').files && document.getElementById('socialPdfInput').files[0];
   const isAdminFlag = isAdminInput(cleanName) || isAdminInput(cleanEmail);
 
   if(!isAdminFlag && !isValidEmail(cleanEmail)){
@@ -1010,22 +1029,41 @@ function confirmSocialLogin(){
     return;
   }
 
-  const displayName = cleanName || cleanEmail.split('@')[0] || ('حساب ' + selectedProvider);
-  const isStaffFlag = isAdminFlag || approvedStaff.includes(displayName) || approvedStaff.includes(cleanEmail);
+  const finalize = (cvName, cvData) => {
+    const displayName = cleanName || cleanEmail.split('@')[0] || ('حساب ' + selectedProvider);
+    const isStaffFlag = isAdminFlag || approvedStaff.includes(displayName) || approvedStaff.includes(cleanEmail);
+    finishLogin({
+      name: displayName,
+      email: cleanEmail || selectedProvider,
+      experience: expText,
+      cvName: cvName || '',
+      cvData: cvData || '',
+      avatar: tempAvatarData || DEFAULT_AVATAR,
+      isAdmin: isAdminFlag,
+      isStaff: isStaffFlag
+    });
+  };
 
-  finishLogin({
-    name: displayName,
-    email: cleanEmail || selectedProvider,
-    avatar: tempAvatarData || DEFAULT_AVATAR,
-    isAdmin: isAdminFlag,
-    isStaff: isStaffFlag
-  });
+  if(pdfFile){
+    const reader = new FileReader();
+    reader.onload = ev => finalize(pdfFile.name, ev.target.result);
+    reader.readAsDataURL(pdfFile);
+  } else {
+    finalize('', '');
+  }
 }
 
 function openProfileModal(){
   if(!currentUser) return;
   document.getElementById('profName').value = currentUser.name;
+  document.getElementById('profExperience').value = currentUser.experience || '';
   document.getElementById('profPreview').src = currentUser.avatar || DEFAULT_AVATAR;
+  const wrap = document.getElementById('profPdfLinkWrap');
+  if(currentUser.cvData){
+    wrap.innerHTML = `<a href="${currentUser.cvData}" download="${escapeHtml(currentUser.cvName || 'cv.pdf')}" style="color:var(--navy);font-weight:700;text-decoration:underline;font-size:13px;">تحميل ملف الخبرات PDF: ${escapeHtml(currentUser.cvName || 'ملف.pdf')}</a>`;
+  } else {
+    wrap.innerHTML = '';
+  }
   tempAvatarData = '';
   openModal('profileModal');
 }
@@ -1034,6 +1072,7 @@ function saveProfile(e){
   e.preventDefault();
   if(!currentUser) return;
   const newName = document.getElementById('profName').value.trim();
+  const newExp = document.getElementById('profExperience').value.trim();
   if(newName){
     currentUser.name = newName;
     if(isAdminInput(newName)){
@@ -1041,6 +1080,7 @@ function saveProfile(e){
       currentUser.isStaff = true;
     }
   }
+  currentUser.experience = newExp;
   if(tempAvatarData) currentUser.avatar = tempAvatarData;
   if(approvedStaff.includes(currentUser.name) || currentUser.isAdmin) currentUser.isStaff = true;
   safeSet('current_user', currentUser);
@@ -1091,7 +1131,7 @@ function updateUI(){
   }
 }
 
-/* نظام البطاقة البنكية والشراء */
+/* البطاقة البنكية (مرة واحدة) */
 function formatCardNumber(inp){
   const digits = inp.value.replace(/\D/g, '').slice(0, 16);
   inp.value = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
@@ -1106,20 +1146,28 @@ function formatExpiry(inp){
   }
 }
 
-function openCardModal(){
+function refreshCardModalState(){
   const box = document.getElementById('savedCardDisplay');
+  const form = document.getElementById('cardForm');
   if(savedCard){
     box.style.display = 'flex';
+    form.style.display = 'none';
     document.getElementById('savedCardMask').textContent = '•••• •••• •••• ' + savedCard.last4;
     document.getElementById('savedCardHolder').textContent = savedCard.holder + ' · ينتهي ' + savedCard.expiry;
   } else {
     box.style.display = 'none';
+    form.style.display = 'block';
   }
+}
+
+function openCardModal(){
+  refreshCardModalState();
   openModal('cardModal');
 }
 
 function savePaymentCard(e){
   e.preventDefault();
+  if(savedCard) return;
   const holder = document.getElementById('cardHolder').value.trim();
   const rawNum = document.getElementById('cardNumber').value.replace(/\D/g, '');
   const expiry = document.getElementById('cardExpiry').value.trim();
@@ -1138,51 +1186,95 @@ function savePaymentCard(e){
     return;
   }
 
-  savedCard = {
-    holder,
-    last4: rawNum.slice(-4),
-    expiry
-  };
+  savedCard = { holder, last4: rawNum.slice(-4), expiry };
   safeSet('saved_payment_card', savedCard);
   e.target.reset();
-  closeModal('cardModal');
-  alert('تم حفظ البطاقة البنكية بنجاح.');
-
-  if(pendingBuyIndex !== null){
-    const idx = pendingBuyIndex;
-    pendingBuyIndex = null;
-    buyProductWithCard(idx);
-  }
+  refreshCardModalState();
+  alert('تم حفظ البطاقة بنجاح.');
 }
 
 function removeSavedCard(){
   savedCard = null;
   safeRemove('saved_payment_card');
-  document.getElementById('savedCardDisplay').style.display = 'none';
+  refreshCardModalState();
 }
 
-function buyProductWithCard(index){
-  const prod = products[index];
-  if(!prod) return;
-  if(!savedCard){
-    pendingBuyIndex = index;
-    openCardModal();
-    return;
-  }
-  const buyerName = currentUser ? currentUser.name : 'عميل زائر';
-  customOrders.push({
-    product: prod.name + ' (المشتري: ' + buyerName + ')',
-    typeLabel: 'شراء بالبطاقة •••• ' + savedCard.last4 + ' (' + prod.price + ')',
-    pdfName: 'لا يوجد ملف',
-    pdfData: '',
-    status: 'مدفوع - بانتظار الاستلام',
-    receivedBy: '',
-    chats: []
-  });
+/* تحديد المبلغ من المسؤول وإتمام الدفع برمز تحقق */
+function setOrderAmountByAdmin(index){
+  if(!currentUser || !currentUser.isAdmin) return;
+  const order = customOrders[index];
+  if(!order) return;
+  const val = prompt('أدخل المبلغ المحدد لهذا الطلب (مثال: 500 ر.س):', order.amount || '');
+  if(val === null) return;
+  const cleanAmount = val.trim();
+  if(!cleanAmount) return;
+  order.amount = cleanAmount;
+  if(order.status === 'قيد المراجعة') order.status = 'بانتظار الدفع';
   safeSet('custom_orders', customOrders);
   renderStaffOrders();
   renderAdmin();
-  alert('تمت عملية الشراء بنجاح عبر البطاقة المنتهية بـ ' + savedCard.last4 + '!');
+}
+
+function openPayInvoiceModal(preselectIndex){
+  if(!savedCard){
+    alert('يرجى إضافة وحفظ البطاقة البنكية أولاً.');
+    openCardModal();
+    return;
+  }
+  const sel = document.getElementById('payOrderSelect');
+  const payableOrders = customOrders
+    .map((o, idx) => ({ o, idx }))
+    .filter(item => item.o.amount && item.o.status !== 'مدفوع');
+
+  if(!payableOrders.length){
+    alert('لا توجد طلبات تم تحديد مبلغ لها من الإدارة بانتظار الدفع حالياً.');
+    return;
+  }
+
+  sel.innerHTML = payableOrders.map(item =>
+    `<option value="${item.idx}">${escapeHtml(item.o.product)} — ${escapeHtml(item.o.amount)}</option>`
+  ).join('');
+
+  if(typeof preselectIndex === 'number' && customOrders[preselectIndex] && customOrders[preselectIndex].amount){
+    sel.value = String(preselectIndex);
+  }
+
+  document.getElementById('payCardInfo').value = '•••• ' + savedCard.last4 + ' (' + savedCard.holder + ')';
+  document.getElementById('payOtpCode').value = '';
+  syncPayOrderPreview();
+  openModal('payModal');
+}
+
+function syncPayOrderPreview(){
+  const idx = Number(document.getElementById('payOrderSelect').value);
+  const order = customOrders[idx];
+  if(!order) return;
+  document.getElementById('payOrderLabel').textContent = order.product;
+  document.getElementById('payAmountDisplay').textContent = order.amount || '0 ر.س';
+}
+
+function completeElectronicPayment(e){
+  e.preventDefault();
+  if(!savedCard){
+    alert('يرجى إضافة البطاقة أولاً.');
+    return;
+  }
+  const idx = Number(document.getElementById('payOrderSelect').value);
+  const otp = document.getElementById('payOtpCode').value.trim();
+  if(!otp || otp.length < 4){
+    alert('يرجى إدخال رمز التحقق.');
+    return;
+  }
+  if(!customOrders[idx]) return;
+
+  customOrders[idx].status = 'مدفوع';
+  customOrders[idx].paidBy = currentUser ? currentUser.name : 'صاحب الطلب';
+  customOrders[idx].paidCardLast4 = savedCard.last4;
+  safeSet('custom_orders', customOrders);
+  closeModal('payModal');
+  renderStaffOrders();
+  renderAdmin();
+  alert('تم إتمام الدفع الإلكتروني بنجاح.');
 }
 
 /* المنتجات والطلبات */
@@ -1205,7 +1297,7 @@ function renderProducts(){
     grid.innerHTML = '<div class="empty-box"><p class="muted" style="margin:0;">لا توجد منتجات معروضة حالياً في المتجر.</p></div>';
     return;
   }
-  grid.innerHTML = products.map((p, idx) => {
+  grid.innerHTML = products.map(p => {
     const cleanPhone = String(p.phone).replace(/\D/g, '').replace(/^0/, '');
     const waLink = `https://wa.me/966${cleanPhone}?text=${encodeURIComponent('السلام عليكم، أرغب في الاستفسار عن المنتج: ' + p.name)}`;
     return `
@@ -1216,7 +1308,6 @@ function renderProducts(){
           <div class="price">${escapeHtml(p.price)}</div>
         </div>
         <div class="product-actions">
-          <button type="button" class="btn gold" style="width:100%;" onclick="buyProductWithCard(${idx})">💳 شراء بالبطاقة</button>
           <a href="${waLink}" target="_blank" rel="noopener" class="whatsapp-btn">
             تواصل عبر الواتساب
           </a>
@@ -1235,10 +1326,10 @@ function submitCustomOrder(e){
 
   const pushOrder = (pdfName, pdfData) => {
     customOrders.push({
-      product: product + ' (مقدم الطلب: ' + requester + ')',
-      typeLabel: 'طلب خاص',
+      product: product + ' (' + requester + ')',
       pdfName: pdfName || 'لا يوجد ملف',
       pdfData: pdfData || '',
+      amount: '',
       status: 'قيد المراجعة',
       receivedBy: '',
       chats: []
@@ -1268,6 +1359,12 @@ function renderPdfCell(order){
   return `<span class="muted">${escapeHtml(order.pdfName || 'لا يوجد ملف')}</span>`;
 }
 
+function renderStatusBadge(status){
+  if(status === 'تم استلام الخدمة') return `<span class="badge-done">${escapeHtml(status)}</span>`;
+  if(status === 'مدفوع') return `<span class="badge-paid">${escapeHtml(status)}</span>`;
+  return `<span class="badge-ok">${escapeHtml(status)}</span>`;
+}
+
 function renderStaffOrders(){
   const tbody = document.getElementById('staffCustomOrders');
   if(!tbody) return;
@@ -1278,9 +1375,9 @@ function renderStaffOrders(){
   tbody.innerHTML = customOrders.map((o, i) => `
     <tr>
       <td>${escapeHtml(o.product)}</td>
-      <td>${escapeHtml(o.typeLabel || 'طلب خاص')}</td>
+      <td>${o.amount ? '<strong>' + escapeHtml(o.amount) + '</strong>' : '<span class="muted">لم يُحدد</span>'}</td>
       <td>${renderPdfCell(o)}</td>
-      <td><span class="${o.status === 'تم استلام الخدمة' ? 'badge-done' : 'badge-ok'}">${escapeHtml(o.status)}</span></td>
+      <td>${renderStatusBadge(o.status)}</td>
       <td>${o.receivedBy ? '<strong>' + escapeHtml(o.receivedBy) + '</strong>' : '<span class="muted">لم يُستلم بعد</span>'}</td>
       <td style="display:flex;gap:8px;flex-wrap:wrap;">
         <button type="button" class="btn navy-btn" style="padding:6px 12px;font-size:12px;" onclick="openOrderChat(${i})">صنع شات</button>
@@ -1345,49 +1442,11 @@ function sendChatMessage(e){
   renderChatMessages();
 }
 
-function submitJobApplication(e){
-  e.preventDefault();
-  const name = document.getElementById('jobName').value.trim();
-  const profession = document.getElementById('jobProfession').value;
-  const experience = document.getElementById('jobExperience').value;
-  jobApps.push({name, profession, experience});
-  safeSet('job_apps', jobApps);
-  alert('تم إرسال طلب التوظيف بنجاح.');
-  e.target.reset();
-  renderAdmin();
-}
-
-function decideJob(index, decision){
-  const app = jobApps[index];
-  jobResults.push({
-    name: app.name,
-    profession: app.profession,
-    experience: app.experience,
-    result: decision
-  });
-  if(decision === 'مقبول' && !approvedStaff.includes(app.name)){
-    approvedStaff.push(app.name);
-    safeSet('approved_staff', approvedStaff);
-  }
-  jobApps.splice(index, 1);
-  safeSet('job_apps', jobApps);
-  safeSet('job_results', jobResults);
-  renderAdmin();
-  updateUI();
-}
-
 function deleteCustomOrder(index){
   if(!currentUser || !currentUser.isAdmin) return;
   customOrders.splice(index, 1);
   safeSet('custom_orders', customOrders);
   renderStaffOrders();
-  renderAdmin();
-}
-
-function deleteJobResult(index){
-  if(!currentUser || !currentUser.isAdmin) return;
-  jobResults.splice(index, 1);
-  safeSet('job_results', jobResults);
   renderAdmin();
 }
 
@@ -1403,39 +1462,18 @@ function renderAdmin(){
   document.getElementById('adminCustomOrders').innerHTML = customOrders.length ? customOrders.map((o, i) => `
     <tr>
       <td>${escapeHtml(o.product)}</td>
-      <td>${escapeHtml(o.typeLabel || 'طلب خاص')}</td>
       <td>${renderPdfCell(o)}</td>
-      <td><span class="${o.status === 'تم استلام الخدمة' ? 'badge-done' : 'badge-ok'}">${escapeHtml(o.status)}</span></td>
+      <td>${o.amount ? '<strong>' + escapeHtml(o.amount) + '</strong>' : '<span class="muted">غير محدد</span>'}</td>
+      <td>${renderStatusBadge(o.status)}</td>
       <td>${o.receivedBy ? '<strong>' + escapeHtml(o.receivedBy) + '</strong>' : '<span class="muted">لم يُستلم بعد</span>'}</td>
       <td style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button type="button" class="btn gold" style="padding:5px 10px;font-size:11.5px;" onclick="setOrderAmountByAdmin(${i})">تحديد المبلغ</button>
         <button type="button" class="btn navy-btn" style="padding:5px 10px;font-size:11.5px;" onclick="openOrderChat(${i})">صنع شات</button>
-        <button type="button" class="btn gold" style="padding:5px 10px;font-size:11.5px;" onclick="receiveService(${i})">استلام الخدمة</button>
+        <button type="button" class="btn outline" style="padding:5px 10px;font-size:11.5px;" onclick="receiveService(${i})">استلام الخدمة</button>
         <button type="button" class="btn danger" style="padding:5px 10px;font-size:11.5px;" onclick="deleteCustomOrder(${i})">حذف</button>
       </td>
     </tr>
   `).join('') : '<tr><td colspan="6">لا توجد طلبات منتجات</td></tr>';
-
-  document.getElementById('adminJobApps').innerHTML = jobApps.length ? jobApps.map((j, i) => `
-    <tr>
-      <td>${escapeHtml(j.name)}</td>
-      <td>${escapeHtml(j.profession)}</td>
-      <td>${escapeHtml(j.experience)}</td>
-      <td style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button type="button" class="btn gold" style="padding:6px 12px;font-size:12px;" onclick="decideJob(${i}, 'مقبول')">قبول</button>
-        <button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="decideJob(${i}, 'مرفوض')">رفض</button>
-      </td>
-    </tr>
-  `).join('') : '<tr><td colspan="4">لا توجد طلبات توظيف جديدة</td></tr>';
-
-  document.getElementById('adminJobResults').innerHTML = jobResults.length ? jobResults.map((r, i) => `
-    <tr>
-      <td>${escapeHtml(r.name)}</td>
-      <td>${escapeHtml(r.profession)}</td>
-      <td>${escapeHtml(r.experience)}</td>
-      <td><span class="${r.result === 'مقبول' ? 'badge-ok' : 'badge-no'}">${escapeHtml(r.result)}</span></td>
-      <td><button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="deleteJobResult(${i})">حذف</button></td>
-    </tr>
-  `).join('') : '<tr><td colspan="5">لا توجد نتائج توظيف مسجلة</td></tr>';
 
   document.getElementById('adminStoreProducts').innerHTML = products.length ? products.map((p, i) => `
     <tr>
