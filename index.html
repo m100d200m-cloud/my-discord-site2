@@ -10,7 +10,6 @@
 <style>
 :root{
   --bg:#f8fafc;
-  --bg-soft:#ffffff;
   --surface:#ffffff;
   --surface-2:#f1f5f9;
   --ink:#0f172a;
@@ -61,7 +60,7 @@ header{
   position:sticky;
   top:0;
   z-index:20;
-  background:rgba(255,255,255,0.92);
+  background:rgba(255,255,255,0.94);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
@@ -85,7 +84,7 @@ header{
 .brand strong{display:block;font-size:15px;font-weight:800;color:var(--navy)}
 .brand small{display:block;color:var(--muted);font-size:11px}
 
-nav{display:flex;align-items:center;gap:22px;font-size:13px;font-weight:700;color:var(--muted)}
+nav{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:700;color:var(--muted)}
 nav a{position:relative;padding:4px 0;transition:color .2s}
 nav a:hover{color:var(--navy)}
 nav a::after{
@@ -97,7 +96,7 @@ nav a:hover::after{width:100%}
 .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 
 .btn{
-  border:0;border-radius:12px;padding:10px 18px;
+  border:0;border-radius:12px;padding:10px 16px;
   cursor:pointer;font-weight:700;font-size:13px;
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   transition:transform .18s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;
@@ -148,12 +147,12 @@ nav a:hover::after{width:100%}
 
 .hero{
   background:linear-gradient(135deg,#ffffff 0%,#f1f5f9 100%);
-  padding:78px 6%;
+  padding:74px 6%;
   border-bottom:1px solid var(--line);
 }
 .hero-inner{
   max-width:1180px;margin:auto;
-  display:grid;grid-template-columns:1.35fr 0.85fr;gap:36px;align-items:center;
+  display:grid;grid-template-columns:1.3fr 0.9fr;gap:36px;align-items:center;
 }
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
@@ -174,25 +173,44 @@ nav a:hover::after{width:100%}
   background:#ffffff;
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:26px;
+  padding:24px;
   box-shadow:var(--shadow);
 }
-.hero-panel h3{margin:0 0 8px;font-size:18px;color:var(--navy)}
-.hero-panel p{margin:0 0 18px;font-size:13px;color:var(--muted)}
-.kpi-list{display:grid;gap:12px}
-.kpi-item{
+.hero-panel h3{margin:0 0 14px;font-size:17px;color:var(--navy)}
+.quick-options{display:grid;gap:10px}
+.quick-opt{
+  width:100%;
+  text-align:right;
   background:var(--bg);
-  border:1px solid var(--line-soft);
-  border-radius:12px;padding:12px 16px;
-  display:flex;justify-content:space-between;align-items:center;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  font-weight:700;
+  font-size:13.5px;
+  color:var(--navy);
+  transition:all .2s ease;
 }
-.kpi-item span{font-size:13px;color:var(--ink);font-weight:600}
-.kpi-item b{font-size:13px;color:#8f6923}
+.quick-opt:hover{
+  background:#fefce8;
+  border-color:var(--gold);
+  transform:translateX(-3px);
+}
+.quick-opt span.arrow{
+  background:var(--navy);
+  color:#f3d58d;
+  padding:3px 10px;
+  border-radius:999px;
+  font-size:11px;
+}
 
-.wrap{max-width:1180px;margin:auto;padding:64px 24px}
+.wrap{max-width:1180px;margin:auto;padding:60px 24px}
 .section-head{
   display:flex;align-items:flex-end;justify-content:space-between;
-  gap:20px;margin-bottom:28px;flex-wrap:wrap;
+  gap:20px;margin-bottom:26px;flex-wrap:wrap;
 }
 .tag{color:#8f6923;font-size:12px;font-weight:800;display:block;margin-bottom:4px}
 .section-head h2{margin:0;font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--navy)}
@@ -222,11 +240,12 @@ nav a:hover::after{width:100%}
 .card p{margin:0 0 16px;font-size:13.5px;color:var(--muted)}
 .price{font-size:17px;font-weight:900;color:#8f6923;margin-bottom:14px}
 
+.product-actions{display:grid;gap:8px}
 .whatsapp-btn{
   display:flex;align-items:center;justify-content:center;gap:8px;
   background:var(--whatsapp);color:#fff;
-  padding:11px 16px;border-radius:12px;
-  font-weight:700;font-size:13.5px;width:100%;
+  padding:10px 14px;border-radius:12px;
+  font-weight:700;font-size:13px;width:100%;
 }
 .whatsapp-btn:hover{background:#15803d}
 
@@ -275,6 +294,22 @@ nav a:hover::after{width:100%}
   border-color:var(--navy);
   background:#ffffff;
 }
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.saved-card-box{
+  background:linear-gradient(135deg,var(--navy),#1e3a5f);
+  color:#fff;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:14px;
+  border:1px solid var(--gold);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.saved-card-box small{color:#f3d58d;display:block;font-size:11px}
 
 footer{
   background:var(--navy);
@@ -372,7 +407,7 @@ footer{
 .admin-content{max-width:1180px;margin:auto;padding:34px 24px}
 .admin-content h2{margin:26px 0 12px;font-size:19px;color:var(--navy)}
 .table-wrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:#ffffff;box-shadow:var(--shadow)}
-.table{width:100%;border-collapse:collapse;min-width:560px}
+.table{width:100%;border-collapse:collapse;min-width:620px}
 .table th{background:var(--surface-2);color:var(--navy);font-weight:800}
 .table th,.table td{padding:13px 15px;text-align:right;border-bottom:1px solid var(--line-soft);font-size:13px}
 .table tr:last-child td{border-bottom:0}
@@ -380,6 +415,7 @@ footer{
 .badge-no{background:#fee2e2;color:#991b1b;padding:4px 10px;border-radius:999px;font-weight:700;font-size:11.5px}
 .badge-done{background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:999px;font-weight:700;font-size:11.5px}
 .muted{color:var(--muted);font-size:13px}
+.err-text{color:var(--danger);font-size:12px;font-weight:700;display:none;margin-top:4px}
 
 @media(max-width:920px){
   .hero-inner{grid-template-columns:1fr}
@@ -387,7 +423,7 @@ footer{
 }
 @media(max-width:760px){
   nav{display:none}
-  .grid,.foot-grid{grid-template-columns:1fr}
+  .grid,.foot-grid,.row-2{grid-template-columns:1fr}
   .hero{padding:58px 5%}
   header{padding:12px 4%}
   .brand strong{font-size:13px}
@@ -410,6 +446,7 @@ footer{
         <span id="headerUserName">المستخدم</span>
         <img id="headerUserAvatar" src="" alt="الصورة الشخصية">
       </div>
+      <button type="button" class="btn outline" onclick="openCardModal()">💳 البطاقة البنكية</button>
       <button id="adminNavBtn" type="button" class="btn gold" style="display:none;" onclick="showAdmin()">لوحة الإدارة</button>
     </div>
 
@@ -439,25 +476,25 @@ footer{
         <div class="hero-buttons">
           <a class="btn navy-btn" href="#shop">تصفح المتجر</a>
           <a class="btn outline" href="#custom-request">طلب منتج</a>
+          <button type="button" class="btn gold" onclick="openCardModal()">إضافة بطاقة للدفع</button>
         </div>
       </div>
 
       <div class="hero-panel">
-        <h3>معايير الخدمة والعمل</h3>
-        <p>إجراءات واضحة ومنظمة لتقديم الخدمات والمنتجات الإدارية.</p>
-        <div class="kpi-list">
-          <div class="kpi-item">
+        <h3>الخدمات والوصول السريع</h3>
+        <div class="quick-options">
+          <a href="#services" class="quick-opt">
             <span>الاستشارات والهيكلة الإدارية</span>
-            <b>معتمد</b>
-          </div>
-          <div class="kpi-item">
-            <span>أنظمة الموارد البشرية</span>
-            <b>محدّث</b>
-          </div>
-          <div class="kpi-item">
+            <span class="arrow">استعراض</span>
+          </a>
+          <a href="#shop" class="quick-opt">
+            <span>أنظمة الموارد البشرية والمنتجات</span>
+            <span class="arrow">المتجر</span>
+          </a>
+          <a href="#custom-request" class="quick-opt">
             <span>متابعة الطلبات والخدمات</span>
-            <b>مباشر</b>
-          </div>
+            <span class="arrow">اطلب الآن</span>
+          </a>
         </div>
       </div>
     </div>
@@ -475,7 +512,7 @@ footer{
         </div>
         <div class="field">
           <label>السعر :</label>
-          <input id="pPrice" required placeholder="مثال: 1,200 ر.س">
+          <input id="pPrice" required placeholder="مثال: 1200 ر.س">
         </div>
         <div class="field">
           <label>رقم التواصل :</label>
@@ -485,17 +522,24 @@ footer{
       </form>
     </div>
 
-    <!-- قسم طلبات المنتجات للموظفين (عرض فقط مع صنع شات واستلام الخدمة) -->
+    <!-- قسم طلبات المنتجات للموظفين والمسؤولين -->
     <div id="staffOrdersPanel" class="staff-panel">
       <h3>طلبات المنتجات الواردة</h3>
-      <p class="muted">متابعة الطلبات وفتح شات أو استلام الخدمة.</p>
+      <p class="muted">متابعة الطلبات وفتح شات أو استلام الخدمة وتحديد المستلم.</p>
       <div class="table-wrap" style="margin-top:14px;">
         <table class="table">
           <thead>
-            <tr><th>المنتج المرغوب</th><th>ملف PDF</th><th>الحالة</th><th>الإجراءات</th></tr>
+            <tr>
+              <th>المنتج / الطلب</th>
+              <th>النوع / الدفع</th>
+              <th>ملف PDF</th>
+              <th>الحالة</th>
+              <th>مستلم الخدمة</th>
+              <th>الإجراءات</th>
+            </tr>
           </thead>
           <tbody id="staffCustomOrders">
-            <tr><td colspan="4">لا توجد طلبات منتجات</td></tr>
+            <tr><td colspan="6">لا توجد طلبات منتجات</td></tr>
           </tbody>
         </table>
       </div>
@@ -508,8 +552,9 @@ footer{
       <div>
         <span class="tag">المتجر</span>
         <h2>المنتجات المعروضة</h2>
-        <p>اختر المنتج المناسب للتواصل المباشر عبر الواتساب.</p>
+        <p>يمكنك الشراء مباشرة بالبطاقة البنكية أو التواصل عبر الواتساب.</p>
       </div>
+      <button type="button" class="btn outline" onclick="openCardModal()">💳 إدارة البطاقة البنكية</button>
     </div>
     <div class="grid" id="productsGrid">
       <div class="empty-box">
@@ -635,14 +680,21 @@ footer{
     <button type="button" class="btn outline" onclick="showStore()">العودة للموقع</button>
   </div>
   <div class="admin-content">
-    <h2>1. طلبات المنتجات</h2>
+    <h2>1. طلبات المنتجات والمشتريات</h2>
     <div class="table-wrap">
       <table class="table">
         <thead>
-          <tr><th>المنتج المرغوب</th><th>ملف PDF</th><th>الحالة</th><th>إجراء</th></tr>
+          <tr>
+            <th>المنتج / الطلب</th>
+            <th>النوع / الدفع</th>
+            <th>ملف PDF</th>
+            <th>الحالة</th>
+            <th>مستلم الخدمة</th>
+            <th>الإجراءات</th>
+          </tr>
         </thead>
         <tbody id="adminCustomOrders">
-          <tr><td colspan="4">لا توجد طلبات منتجات</td></tr>
+          <tr><td colspan="6">لا توجد طلبات منتجات</td></tr>
         </tbody>
       </table>
     </div>
@@ -690,7 +742,7 @@ footer{
   <div class="modal-box" onclick="event.stopPropagation()">
     <button type="button" class="close" onclick="closeModal('auth')">إغلاق ✕</button>
     <h2>تسجيل الدخول</h2>
-    <p class="muted">سجّل دخولك للوصول إلى حسابك.</p>
+    <p class="muted">أدخل بريداً إلكترونياً صالحاً وكلمة المرور للدخول.</p>
 
     <button type="button" class="oauth-btn" onclick="openSocialBox('Google')">
       <span style="color:#8f6923;font-weight:900;">G</span> المتابعة عبر Google
@@ -699,20 +751,34 @@ footer{
       <span style="font-weight:900;"></span> المتابعة عبر Apple
     </button>
 
+    <div id="socialBox" style="display:none;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;">
+      <div class="field" style="margin:0 0 8px;">
+        <label id="socialLabel">الاسم في الحساب :</label>
+        <input id="socialNameInput" placeholder="اكتب اسمك">
+      </div>
+      <div class="field" style="margin:0 0 10px;">
+        <label>البريد الإلكتروني الصالح :</label>
+        <input id="socialEmailInput" type="email" placeholder="name@example.com">
+      </div>
+      <button type="button" class="btn gold" style="width:100%;" onclick="confirmSocialLogin()">تأكيد الدخول</button>
+    </div>
+
     <div class="divider">أو عبر البريد الإلكتروني</div>
 
-    <form onsubmit="handleAuth(event)">
+    <form onsubmit="handleAuth(event)" novalidate>
       <div class="field">
         <label>الاسم (اختياري) :</label>
-        <input id="authName" placeholder="اكتب اسمك">
+        <input id="authName" placeholder="اكتب اسمك ليظهر في حسابك">
       </div>
       <div class="field">
         <label>البريد الإلكتروني :</label>
         <input id="authEmail" type="text" required placeholder="name@example.com">
+        <span id="emailError" class="err-text">يرجى إدخال بريد إلكتروني صالح (مثال: name@domain.com)</span>
       </div>
       <div class="field">
         <label>كلمة المرور :</label>
-        <input id="authPass" type="text" required placeholder="••••••••">
+        <input id="authPass" type="password" required placeholder="••••••••">
+        <span id="passError" class="err-text">يرجى إدخال كلمة المرور</span>
       </div>
       <div class="field">
         <label>الصورة الشخصية (اختياري) :</label>
@@ -720,6 +786,46 @@ footer{
         <img id="authPreview" class="avatar-preview" src="" alt="معاينة الصورة">
       </div>
       <button class="btn gold" type="submit" style="width:100%;margin-top:8px;">دخول</button>
+    </form>
+  </div>
+</div>
+
+<!-- نافذة البطاقة البنكية -->
+<div class="modal" id="cardModal" onclick="backdropClose(event, 'cardModal')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button type="button" class="close" onclick="closeModal('cardModal')">إغلاق ✕</button>
+    <h2>البطاقة البنكية للدفع</h2>
+    <p class="muted">أضف بطاقتك لإتمام عمليات الشراء من المتجر بسهولة.</p>
+
+    <div id="savedCardDisplay" style="display:none;" class="saved-card-box">
+      <div>
+        <small>البطاقة المحفوظة</small>
+        <strong id="savedCardMask">•••• •••• •••• 0000</strong>
+        <div id="savedCardHolder" style="font-size:12px;color:#cbd5e1;"></div>
+      </div>
+      <button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="removeSavedCard()">إزالة</button>
+    </div>
+
+    <form onsubmit="savePaymentCard(event)">
+      <div class="field">
+        <label>اسم حامل البطاقة :</label>
+        <input id="cardHolder" required placeholder="الاسم كما يظهر على البطاقة">
+      </div>
+      <div class="field">
+        <label>رقم البطاقة :</label>
+        <input id="cardNumber" required maxlength="19" placeholder="0000 0000 0000 0000" oninput="formatCardNumber(this)">
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>تاريخ الانتهاء :</label>
+          <input id="cardExpiry" required maxlength="5" placeholder="MM/YY" oninput="formatExpiry(this)">
+        </div>
+        <div class="field">
+          <label>رمز الأمان (CVV) :</label>
+          <input id="cardCvv" required maxlength="4" placeholder="123">
+        </div>
+      </div>
+      <button class="btn gold" type="submit" style="width:100%;margin-top:8px;">حفظ البطاقة</button>
     </form>
   </div>
 </div>
@@ -740,7 +846,8 @@ footer{
         <input id="profName" required>
       </div>
       <button class="btn gold" type="submit" style="width:100%;margin-top:8px;">حفظ التعديلات</button>
-      <button type="button" class="btn danger" style="width:100%;margin-top:10px;" onclick="logoutUser()">تسجيل الخروج</button>
+      <button type="button" class="btn outline" style="width:100%;margin-top:8px;" onclick="closeModal('profileModal');openCardModal();">💳 إعدادات البطاقة البنكية</button>
+      <button type="button" class="btn danger" style="width:100%;margin-top:8px;" onclick="logoutUser()">تسجيل الخروج</button>
     </form>
   </div>
 </div>
@@ -791,9 +898,11 @@ let jobApps = safeGet('job_apps', []);
 let jobResults = safeGet('job_results', []);
 let approvedStaff = safeGet('approved_staff', []);
 let currentUser = safeGet('current_user', null);
+let savedCard = safeGet('saved_payment_card', null);
 let tempAvatarData = '';
 let selectedProvider = 'Google';
 let activeChatOrderIndex = null;
+let pendingBuyIndex = null;
 
 document.getElementById('authPreview').src = DEFAULT_AVATAR;
 
@@ -801,6 +910,8 @@ function openModal(id){
   if(id === 'auth'){
     const sb = document.getElementById('socialBox');
     if(sb) sb.style.display = 'none';
+    document.getElementById('emailError').style.display = 'none';
+    document.getElementById('passError').style.display = 'none';
   }
   document.getElementById(id).classList.add('show');
 }
@@ -818,9 +929,17 @@ function previewAvatar(e, imgId){
   reader.readAsDataURL(file);
 }
 
+function isValidEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email || '').trim());
+}
+
 function isAdminInput(val){
   const clean = String(val || '').trim();
   return clean === 'س1' || clean === 'س 1';
+}
+
+function isStaffCode(val){
+  return String(val || '').trim() === '1122';
 }
 
 function finishLogin(userObj){
@@ -843,11 +962,24 @@ function handleAuth(e){
   const pass = document.getElementById('authPass').value.trim();
   const customName = document.getElementById('authName').value.trim();
 
-  if(!email || !pass) return;
+  const emailErr = document.getElementById('emailError');
+  const passErr = document.getElementById('passError');
+  emailErr.style.display = 'none';
+  passErr.style.display = 'none';
 
   const isAdminFlag = isAdminInput(email) || isAdminInput(pass) || isAdminInput(customName);
-  const displayName = customName || (isAdminInput(email) ? 'مستخدم' : email.split('@')[0]) || 'مستخدم';
-  const isStaffFlag = isAdminFlag || approvedStaff.includes(displayName) || approvedStaff.includes(email);
+
+  if(!isAdminFlag && !isValidEmail(email)){
+    emailErr.style.display = 'block';
+    return;
+  }
+  if(!pass){
+    passErr.style.display = 'block';
+    return;
+  }
+
+  const displayName = customName || (email.includes('@') ? email.split('@')[0] : 'مستخدم');
+  const isStaffFlag = isAdminFlag || isStaffCode(pass) || approvedStaff.includes(displayName) || approvedStaff.includes(email);
 
   finishLogin({
     name: displayName,
@@ -863,18 +995,27 @@ function openSocialBox(provider){
   selectedProvider = provider;
   document.getElementById('socialLabel').textContent = 'الاسم في حساب ' + provider + ' :';
   document.getElementById('socialNameInput').value = '';
+  document.getElementById('socialEmailInput').value = '';
   document.getElementById('socialBox').style.display = 'block';
   document.getElementById('socialNameInput').focus();
 }
 
 function confirmSocialLogin(){
-  const cleanName = document.getElementById('socialNameInput').value.trim() || ('حساب ' + selectedProvider);
-  const isAdminFlag = isAdminInput(cleanName);
-  const isStaffFlag = isAdminFlag || approvedStaff.includes(cleanName);
+  const cleanName = document.getElementById('socialNameInput').value.trim();
+  const cleanEmail = document.getElementById('socialEmailInput').value.trim();
+  const isAdminFlag = isAdminInput(cleanName) || isAdminInput(cleanEmail);
+
+  if(!isAdminFlag && !isValidEmail(cleanEmail)){
+    alert('يرجى إدخال بريد إلكتروني صالح للمتابعة.');
+    return;
+  }
+
+  const displayName = cleanName || cleanEmail.split('@')[0] || ('حساب ' + selectedProvider);
+  const isStaffFlag = isAdminFlag || approvedStaff.includes(displayName) || approvedStaff.includes(cleanEmail);
 
   finishLogin({
-    name: cleanName,
-    email: selectedProvider,
+    name: displayName,
+    email: cleanEmail || selectedProvider,
     avatar: tempAvatarData || DEFAULT_AVATAR,
     isAdmin: isAdminFlag,
     isStaff: isStaffFlag
@@ -931,17 +1072,16 @@ function updateUI(){
     if(approvedStaff.includes(currentUser.name) || approvedStaff.includes(currentUser.email)){
       currentUser.isStaff = true;
     }
-    const canPublish = Boolean(currentUser.isStaff || currentUser.isAdmin);
-    const staffOnlyView = Boolean(currentUser.isStaff && !currentUser.isAdmin);
+    const canManageOrders = Boolean(currentUser.isStaff || currentUser.isAdmin);
 
     loginBtn.style.display = 'none';
     userPill.classList.add('show');
     document.getElementById('headerUserName').textContent = currentUser.name;
     document.getElementById('headerUserAvatar').src = currentUser.avatar || DEFAULT_AVATAR;
     adminBtn.style.display = currentUser.isAdmin ? 'inline-flex' : 'none';
-    empSec.classList.toggle('active', canPublish);
-    staffOrdersPanel.classList.toggle('active', staffOnlyView);
-    if(staffOnlyView) renderStaffOrders();
+    empSec.classList.toggle('active', canManageOrders);
+    staffOrdersPanel.classList.toggle('active', canManageOrders);
+    if(canManageOrders) renderStaffOrders();
   } else {
     loginBtn.style.display = 'inline-flex';
     userPill.classList.remove('show');
@@ -951,6 +1091,101 @@ function updateUI(){
   }
 }
 
+/* نظام البطاقة البنكية والشراء */
+function formatCardNumber(inp){
+  const digits = inp.value.replace(/\D/g, '').slice(0, 16);
+  inp.value = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
+}
+
+function formatExpiry(inp){
+  const digits = inp.value.replace(/\D/g, '').slice(0, 4);
+  if(digits.length >= 3){
+    inp.value = digits.slice(0, 2) + '/' + digits.slice(2);
+  } else {
+    inp.value = digits;
+  }
+}
+
+function openCardModal(){
+  const box = document.getElementById('savedCardDisplay');
+  if(savedCard){
+    box.style.display = 'flex';
+    document.getElementById('savedCardMask').textContent = '•••• •••• •••• ' + savedCard.last4;
+    document.getElementById('savedCardHolder').textContent = savedCard.holder + ' · ينتهي ' + savedCard.expiry;
+  } else {
+    box.style.display = 'none';
+  }
+  openModal('cardModal');
+}
+
+function savePaymentCard(e){
+  e.preventDefault();
+  const holder = document.getElementById('cardHolder').value.trim();
+  const rawNum = document.getElementById('cardNumber').value.replace(/\D/g, '');
+  const expiry = document.getElementById('cardExpiry').value.trim();
+  const cvv = document.getElementById('cardCvv').value.trim();
+
+  if(rawNum.length < 12){
+    alert('يرجى إدخال رقم بطاقة صحيح.');
+    return;
+  }
+  if(!/^\d{2}\/\d{2}$/.test(expiry)){
+    alert('يرجى إدخال تاريخ انتهاء صحيح (MM/YY).');
+    return;
+  }
+  if(cvv.length < 3){
+    alert('يرجى إدخال رمز أمان صحيح.');
+    return;
+  }
+
+  savedCard = {
+    holder,
+    last4: rawNum.slice(-4),
+    expiry
+  };
+  safeSet('saved_payment_card', savedCard);
+  e.target.reset();
+  closeModal('cardModal');
+  alert('تم حفظ البطاقة البنكية بنجاح.');
+
+  if(pendingBuyIndex !== null){
+    const idx = pendingBuyIndex;
+    pendingBuyIndex = null;
+    buyProductWithCard(idx);
+  }
+}
+
+function removeSavedCard(){
+  savedCard = null;
+  safeRemove('saved_payment_card');
+  document.getElementById('savedCardDisplay').style.display = 'none';
+}
+
+function buyProductWithCard(index){
+  const prod = products[index];
+  if(!prod) return;
+  if(!savedCard){
+    pendingBuyIndex = index;
+    openCardModal();
+    return;
+  }
+  const buyerName = currentUser ? currentUser.name : 'عميل زائر';
+  customOrders.push({
+    product: prod.name + ' (المشتري: ' + buyerName + ')',
+    typeLabel: 'شراء بالبطاقة •••• ' + savedCard.last4 + ' (' + prod.price + ')',
+    pdfName: 'لا يوجد ملف',
+    pdfData: '',
+    status: 'مدفوع - بانتظار الاستلام',
+    receivedBy: '',
+    chats: []
+  });
+  safeSet('custom_orders', customOrders);
+  renderStaffOrders();
+  renderAdmin();
+  alert('تمت عملية الشراء بنجاح عبر البطاقة المنتهية بـ ' + savedCard.last4 + '!');
+}
+
+/* المنتجات والطلبات */
 function addStoreProduct(e){
   e.preventDefault();
   const name = document.getElementById('pName').value;
@@ -970,7 +1205,7 @@ function renderProducts(){
     grid.innerHTML = '<div class="empty-box"><p class="muted" style="margin:0;">لا توجد منتجات معروضة حالياً في المتجر.</p></div>';
     return;
   }
-  grid.innerHTML = products.map(p => {
+  grid.innerHTML = products.map((p, idx) => {
     const cleanPhone = String(p.phone).replace(/\D/g, '').replace(/^0/, '');
     const waLink = `https://wa.me/966${cleanPhone}?text=${encodeURIComponent('السلام عليكم، أرغب في الاستفسار عن المنتج: ' + p.name)}`;
     return `
@@ -980,9 +1215,12 @@ function renderProducts(){
           <h3>${escapeHtml(p.name)}</h3>
           <div class="price">${escapeHtml(p.price)}</div>
         </div>
-        <a href="${waLink}" target="_blank" rel="noopener" class="whatsapp-btn">
-          تواصل عبر الواتساب
-        </a>
+        <div class="product-actions">
+          <button type="button" class="btn gold" style="width:100%;" onclick="buyProductWithCard(${idx})">💳 شراء بالبطاقة</button>
+          <a href="${waLink}" target="_blank" rel="noopener" class="whatsapp-btn">
+            تواصل عبر الواتساب
+          </a>
+        </div>
       </div>
     `;
   }).join('');
@@ -993,13 +1231,16 @@ function submitCustomOrder(e){
   const product = document.getElementById('reqProduct').value;
   const fileInput = document.getElementById('reqPdf');
   const file = fileInput.files && fileInput.files[0];
+  const requester = currentUser ? currentUser.name : 'زائر';
 
   const pushOrder = (pdfName, pdfData) => {
     customOrders.push({
-      product,
+      product: product + ' (مقدم الطلب: ' + requester + ')',
+      typeLabel: 'طلب خاص',
       pdfName: pdfName || 'لا يوجد ملف',
       pdfData: pdfData || '',
       status: 'قيد المراجعة',
+      receivedBy: '',
       chats: []
     });
     safeSet('custom_orders', customOrders);
@@ -1031,14 +1272,16 @@ function renderStaffOrders(){
   const tbody = document.getElementById('staffCustomOrders');
   if(!tbody) return;
   if(!customOrders.length){
-    tbody.innerHTML = '<tr><td colspan="4">لا توجد طلبات منتجات</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6">لا توجد طلبات منتجات</td></tr>';
     return;
   }
   tbody.innerHTML = customOrders.map((o, i) => `
     <tr>
       <td>${escapeHtml(o.product)}</td>
+      <td>${escapeHtml(o.typeLabel || 'طلب خاص')}</td>
       <td>${renderPdfCell(o)}</td>
       <td><span class="${o.status === 'تم استلام الخدمة' ? 'badge-done' : 'badge-ok'}">${escapeHtml(o.status)}</span></td>
+      <td>${o.receivedBy ? '<strong>' + escapeHtml(o.receivedBy) + '</strong>' : '<span class="muted">لم يُستلم بعد</span>'}</td>
       <td style="display:flex;gap:8px;flex-wrap:wrap;">
         <button type="button" class="btn navy-btn" style="padding:6px 12px;font-size:12px;" onclick="openOrderChat(${i})">صنع شات</button>
         <button type="button" class="btn gold" style="padding:6px 12px;font-size:12px;" onclick="receiveService(${i})">استلام الخدمة</button>
@@ -1051,6 +1294,7 @@ function receiveService(index){
   if(!currentUser || (!currentUser.isStaff && !currentUser.isAdmin)) return;
   if(!customOrders[index]) return;
   customOrders[index].status = 'تم استلام الخدمة';
+  customOrders[index].receivedBy = currentUser.name;
   safeSet('custom_orders', customOrders);
   renderStaffOrders();
   renderAdmin();
@@ -1159,11 +1403,17 @@ function renderAdmin(){
   document.getElementById('adminCustomOrders').innerHTML = customOrders.length ? customOrders.map((o, i) => `
     <tr>
       <td>${escapeHtml(o.product)}</td>
+      <td>${escapeHtml(o.typeLabel || 'طلب خاص')}</td>
       <td>${renderPdfCell(o)}</td>
-      <td>${escapeHtml(o.status)}</td>
-      <td><button type="button" class="btn danger" style="padding:6px 12px;font-size:12px;" onclick="deleteCustomOrder(${i})">حذف</button></td>
+      <td><span class="${o.status === 'تم استلام الخدمة' ? 'badge-done' : 'badge-ok'}">${escapeHtml(o.status)}</span></td>
+      <td>${o.receivedBy ? '<strong>' + escapeHtml(o.receivedBy) + '</strong>' : '<span class="muted">لم يُستلم بعد</span>'}</td>
+      <td style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button type="button" class="btn navy-btn" style="padding:5px 10px;font-size:11.5px;" onclick="openOrderChat(${i})">صنع شات</button>
+        <button type="button" class="btn gold" style="padding:5px 10px;font-size:11.5px;" onclick="receiveService(${i})">استلام الخدمة</button>
+        <button type="button" class="btn danger" style="padding:5px 10px;font-size:11.5px;" onclick="deleteCustomOrder(${i})">حذف</button>
+      </td>
     </tr>
-  `).join('') : '<tr><td colspan="4">لا توجد طلبات منتجات</td></tr>';
+  `).join('') : '<tr><td colspan="6">لا توجد طلبات منتجات</td></tr>';
 
   document.getElementById('adminJobApps').innerHTML = jobApps.length ? jobApps.map((j, i) => `
     <tr>
